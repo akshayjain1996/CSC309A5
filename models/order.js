@@ -1,6 +1,4 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/db10');
-
 var orderSchema = new mongoose.Schema({
 	
 	id: Number,
