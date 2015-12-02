@@ -14,8 +14,7 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
  
       <!--Imports for the dropup menu javascript-->
-      <script src="jquery.min.js"></script>
-      
+      <script src="javascript/frontend.js"></script>
      
       <!--Title that will be displayed on the top when the current page is open-->
       <title>CaterGeek</title>    
@@ -31,21 +30,6 @@
       <div class="col-md-4">GUEST</div>
     </div>
 
-    <nav id="nav" class="navbar navbar-inverse"> 
-      <div id="nav_bar" class="container-fluid">  
-        <div class="navbar-header"> 
-          <a class="navbar-brand" href="#">Home</a> 
-        </div>  
-        <div class="navbar-collapse collapse in" aria-expanded="true"> 
-         <ul class="nav navbar-nav"> 
-            <li><a href="#">Page 1</a></li> 
-            <li><a href="#">Page 2</a></li> 
-            <li><a href="#">Page 3</a></li> 
-          </ul> 
-        </div> 
-      </div> 
-    </nav>
-
     <div id="signup-container" class="container">    
         <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div id="panel" class="panel" >
@@ -56,6 +40,7 @@
                     <div id="form_div" class="panel-body" >
 
                         <div id="login-alert" class="alert alert-danger col-sm-12"></div>
+
                         <div id="form-signup" class="panel-body">
                           <form id="loginform" class="form-horizontal" role="form">         
                             <div id="divsi_username" class="input-group">
@@ -74,12 +59,13 @@
                             </div>
 
                             <div class="col-sm-12 controls">
-                                <a id="btn-signuphere" href="#" class="btn btn-info">Signup</a>
-                                <a id="btn-back" href="#" class="btn btn-info">Back</a>
+                                <button id="btn-signuphere" onclick="signup()" class="btn btn-info">Signup</button>
+                                <button id="btn-back" onclick="goBack()" class="btn btn-info">Back</button>
                             </div> 
                           </form>
                         </div>
-                            
+                           
+                        <div id="log" class="panel-body"> 
                         <form id="loginform" class="form-horizontal" role="form">         
                             <div id="div_username" class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -93,10 +79,12 @@
                         </form>
 
                          <div class="col-sm-12 controls">
-                            <a id="btn-login" href="#" class="btn btn-info">Login</a>
-                            <a id="btn-signup" href="#" class="btn btn-info">Signup</a>
-                            <a id="btn-proceed" href="home.html" class="btn btn-info">Proceed without signup</a>
+                            <button id="btn-login" onclick="login()" class="btn btn-info">Login</button>
+                            <button id="btn-signup" onclick="goSignup()" class="btn btn-info">Signup</button>
+                            <button id="btn-proceed" onclick="goHome()" class="btn btn-info">Proceed without signup</button>
                          </div> 
+
+                        </div>
                     </div>                     
               </div>  
         </div>
