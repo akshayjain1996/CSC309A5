@@ -1,20 +1,23 @@
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/db10');
+var Tag = require('./tag');
+var Order = require('./order');
+var Review = require('./review');
 
 var userSchema = new mongoose.Schema({
+  id: String,
   username: String,
   password: String,
-  permission: Number,
-  description: String,
+  aboutMe: String,
   displayname: String,
   image: String,
-  ip: [String],
-  alluserPage: Number,
-  profilePage: Number,
-  editPage: Number,
-  trackPage: Number
-
-  
+  address: String,
+  priceRange: Number,
+  tags: [Tag],
+  orders: [Order],
+  rating: Number,
+  speciality: [String],
+  reviews: [Review]
 });
 
 module.exports = mongoose.model('User', userSchema);
