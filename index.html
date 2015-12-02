@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+  <!--Head containing all imported code etc.-->
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!--Imports for the dropup menu. Source links are stored in the files-->
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+ 
+      <!--Imports for the dropup menu javascript-->
+      <script src="javascript/frontend.js"></script>
+     
+      <!--Title that will be displayed on the top when the current page is open-->
+      <title>CaterGeek</title>    
+  </head>
+
+
+  <!--Body begining-->
+  <body> 
+    <div id="title-div" class="row">
+      <div class="col-md-8">
+        <img id="logo" src="images/Logo.png" class="img-responsive" alt="Oops!">
+      </div>
+      <div class="col-md-4">GUEST</div>
+    </div>
+
+    <div id="signup-container" class="container">    
+        <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+            <div id="panel" class="panel" >
+                    <div class="panel-heading">
+                        <div class="panel-title">Please sign in:</div>
+                    </div>     
+
+                    <div id="form_div" class="panel-body" >
+
+                        <div id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+                        <div id="form-signup" class="panel-body">
+                          <form id="loginform" class="form-horizontal" role="form">         
+                            <div id="divsi_username" class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                              <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Enter email here.">   
+                            </div>
+
+                            <div id="divsi_password" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="login-password" type="password" class="form-control" name="password" placeholder="Enter your password here.">
+                            </div>
+
+                            <div id="divsi_conpassword" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="login-password" type="password" class="form-control" name="password" placeholder="Confirm your password.">
+                            </div>
+
+                            <div class="col-sm-12 controls">
+                                <button id="btn-signuphere" onclick="signup()" class="btn btn-info">Signup</button>
+                                <button id="btn-back" onclick="goBack()" class="btn btn-info">Back</button>
+                            </div> 
+                          </form>
+                        </div>
+                           
+                        <div id="log" class="panel-body"> 
+                        <form id="loginform" class="form-horizontal" role="form">         
+                            <div id="div_username" class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                              <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Enter email here.">   
+                            </div>
+
+                            <div id="div_password" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="login-password" type="password" class="form-control" name="password" placeholder="Enter your password here.">
+                            </div>
+                        </form>
+
+                         <div class="col-sm-12 controls">
+                            <button id="btn-login" onclick="login()" class="btn btn-info">Login</button>
+                            <button id="btn-signup" onclick="goSignup()" class="btn btn-info">Signup</button>
+                            <button id="btn-proceed" onclick="goHome()" class="btn btn-info">Proceed without signup</button>
+                         </div> 
+
+                        </div>
+                    </div>                     
+              </div>  
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <!--Footre along with the copyright icon.-->
+    <footer id="footer">&copy; Copyright 2015 CaterGeek</footer>
+
+    <!--End Body-->
+  </body>
+</html>

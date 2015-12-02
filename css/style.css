@@ -1,0 +1,49 @@
+
+#logo{
+	height: 100px;
+}
+
+#title-div{
+	border: 5px solid #00688B;
+}
+
+#nav_bar{
+	background-color: #3D2117;
+}
+
+#loginbox{
+	margin-top: 50px;
+}
+
+#form_div{
+	padding-top: 30px; 
+}
+
+#login-alert{
+	display: none; 
+}
+
+#form-signup{
+	display: none;
+}
+
+#div_username{
+	margin-bottom: 25px; 
+}
+
+#div_password{
+	margin-bottom: 25px; 
+}
+
+#signup-container{
+	padding: 100px;
+}
+
+#log{
+	display: block;
+}
+
+#panel{
+	background-color: #FEFCE8;
+	border: 2px solid #00688B;
+}
