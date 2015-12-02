@@ -1,4 +1,5 @@
 var User = require('../models/user');
+var Order = require('../models/order');
 
 module.exports = {
 	addUser : function(req, res){
@@ -260,5 +261,24 @@ module.exports = {
 			}
 		});
 
-	}
+	},
+	/*
+	Order functions below
+	*/
+	
+	addOrder : function(req, res){
+		var session;
+		session = req.session;
+		var order = new Order();				
+		order.details = req.body.details;
+		order.contact_info = req.body.contact_info;
+		//order.placed_time
+		order.fulfillment_time = req.body.fulfillment_time;
+		order.delivery_details = req.body.delivery_details;
+		order.catererid = req.body.catererid;
+		order.status = 0;//0=not accepted yet, 1=acccepted, 2=done
+		order.save();
+		res.session = session;
+		res.send({sucess: 'true', user: JSON.stringify(usr)});
+	},
 }
