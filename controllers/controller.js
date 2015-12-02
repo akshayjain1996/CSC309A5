@@ -262,6 +262,22 @@ module.exports = {
 		});
 
 	},
+	
+	uploadProfile: function  (req, res) {
+		if(req.method === 'GET')
+			return res.json({'status':'GET not allowed'});
+
+		var uploadFile = req.file('uploadFile');
+
+	    uploadFile.upload({ dirname: '/public/img/profile'},function onUploadComplete (err, files) {
+	    																		
+	    	if (err) return res.serverError(err);
+			var fullName = files[0].fd;
+			var arr = fullName.split("\\");
+			User.update({id: req.body.catererid}, {profile_img_link: (arr[arr.length - 1])}).exec(function cb(err){
+				});
+	    });
+	},
 	/*
 	Order functions below
 	*/
@@ -307,6 +323,12 @@ module.exports = {
 				res.send({orderList: docs});
     		}
     	});
+	},
+	
+	//when an order is rejected add it to the pool of orders that have not been picked up by anybody
+	rejectOrder: function(req, res){
+		req.body.orderstatus = 0;
+		req.body.catererid = -1;
+		updateOrderStatus(req, res);
 	}
-	//
 }
