@@ -6,51 +6,106 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!--Imports for the dropup menu. Source links are stored in the files-->
-      <link rel="stylesheet" href="../External/bootstrap.min.css">
-      <link rel="stylesheet" href="../public/css/index.css">
-       
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+ 
       <!--Imports for the dropup menu javascript-->
       <script src="jquery.min.js"></script>
       
      
       <!--Title that will be displayed on the top when the current page is open-->
-      <title>Welcome to CodeGeek!</title>    
+      <title>CaterGeek</title>    
   </head>
 
 
   <!--Body begining-->
-  <body>
-
-
-    <!--Navbar on top-->
-
-    <ul id="nav">
-      <div class="pull-left">
-        <h6 class="logo">
-          <span class="Cater">Cater</span>
-          <span class="Geek">Geek</span>
-        </h6>
+  <body> 
+    <div id="title-div" class="row">
+      <div class="col-md-8">
+        <img id="logo" src="images/Logo.png" class="img-responsive" alt="Oops!">
       </div>
-      <div class="fancyNav">
-        <div class="pull-right">
-          <li id="singin"><a href="loginoptions.html" Style="color:red;">Sign In</a></li>
-          <li id="singup"><a href="register.html" Style="color:purple;">Sign Up</a></li>
+      <div class="col-md-4">GUEST</div>
+    </div>
+
+    <nav id="nav" class="navbar navbar-inverse"> 
+      <div id="nav_bar" class="container-fluid">  
+        <div class="navbar-header"> 
+          <a class="navbar-brand" href="#">Home</a> 
+        </div>  
+        <div class="navbar-collapse collapse in" aria-expanded="true"> 
+         <ul class="nav navbar-nav"> 
+            <li><a href="#">Page 1</a></li> 
+            <li><a href="#">Page 2</a></li> 
+            <li><a href="#">Page 3</a></li> 
+          </ul> 
+        </div> 
+      </div> 
+    </nav>
+
+    <div id="signup-container" class="container">    
+        <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+            <div id="panel" class="panel" >
+                    <div class="panel-heading">
+                        <div class="panel-title">Please sign in:</div>
+                    </div>     
+
+                    <div id="form_div" class="panel-body" >
+
+                        <div id="login-alert" class="alert alert-danger col-sm-12"></div>
+                        <div id="form-signup" class="panel-body">
+                          <form id="loginform" class="form-horizontal" role="form">         
+                            <div id="divsi_username" class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                              <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Enter email here.">   
+                            </div>
+
+                            <div id="divsi_password" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="login-password" type="password" class="form-control" name="password" placeholder="Enter your password here.">
+                            </div>
+
+                            <div id="divsi_conpassword" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="login-password" type="password" class="form-control" name="password" placeholder="Confirm your password.">
+                            </div>
+
+                            <div class="col-sm-12 controls">
+                                <a id="btn-signuphere" href="#" class="btn btn-info">Signup</a>
+                                <a id="btn-back" href="#" class="btn btn-info">Back</a>
+                            </div> 
+                          </form>
+                        </div>
+                            
+                        <form id="loginform" class="form-horizontal" role="form">         
+                            <div id="div_username" class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                              <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Enter email here.">   
+                            </div>
+
+                            <div id="div_password" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="login-password" type="password" class="form-control" name="password" placeholder="Enter your password here.">
+                            </div>
+                        </form>
+
+                         <div class="col-sm-12 controls">
+                            <a id="btn-login" href="#" class="btn btn-info">Login</a>
+                            <a id="btn-signup" href="#" class="btn btn-info">Signup</a>
+                            <a id="btn-proceed" href="home.html" class="btn btn-info">Proceed without signup</a>
+                         </div> 
+                    </div>                     
+              </div>  
         </div>
-      </div>
-    </ul><br>
-
-
-   
-    
-   
-
-   
-
-
-       
-
+    </div>
+    <br>
+    <br>
+    <br>
     <!--Footre along with the copyright icon.-->
-    <footer>&copy; Copyright 2015 CaterGeek</footer>
+    <footer id="footer">&copy; Copyright 2015 CaterGeek</footer>
 
     <!--End Body-->
   </body>
