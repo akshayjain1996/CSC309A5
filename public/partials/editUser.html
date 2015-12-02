@@ -1,0 +1,112 @@
+
+<div class="row">
+    <div class="col-md-2">
+        
+    </div>
+
+    <div class="col-md-8">
+        <div class="login-container">
+            <div class="row">
+                <div class="col-md-9">
+                    
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn" ng-click="backHandle()">Back</button>  
+                </div>
+            </div>
+            <div class="row">
+                <div class="page-heading">
+                    <h1>Edit Profile</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="profile-photo">
+                            <img src="img/profile.jpg">
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <input type="file" name="file" onchange="angular.element(this).scope().uploadPic(this.files)"/>
+                    </div> 
+                </div>
+                <div class="col-md-8">
+                    <div class="profile">
+                        <div class="page-heading">
+                            <h2>User Information</h2>
+                        </div>
+                        <form class="form-signin" ng-submit="editProfile()">
+                            <div class="row">
+                                <div class="col-md-5">
+                                <label>Display Name</label>
+                                </div>
+                                <div class="col-md-7">
+                                <input ng-model="displayname" class="form-control" placeholder="DisplayName" autofocus="">
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-5">
+                                <label>User Name</label>
+                                </div>
+                                <div class="col-md-7">
+                                <input ng-model="username" class="form-control" placeholder="Email address" autofocus="" readonly>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-5">
+                                <label>Description</label>
+                                </div>
+                                <div class="col-md-7">
+                                <input ng-model="description" class="form-control" placeholder="Description" autofocus="">
+                                </div>
+                            </div>
+                            <br>
+
+                            <button type="submit" class="btn">Update</button>
+                        </form>                    
+                    </div>
+                    <br>
+                    <div class="change-pwd">
+                        <div class="page-heading">
+                            <h2>Change Password</h2>
+                        </div>
+                        <form class="form-signin" ng-submit="changePassword()">
+                            <div class="row">
+                                <div class="col-md-5">
+                                <label>Old Password</label>
+                                </div>
+                                <div class="col-md-7">
+                                <input type="password" ng-model="oldPassword" class="form-control" placeholder="Old Password" autofocus="">
+                                </div>
+                            </div>
+                            <br>
+                             <div class="row">
+                                <div class="col-md-5">
+                                <label>New Password</label>
+                                </div>
+                                <div class="col-md-7">
+                                <input type="password" ng-model="newPassword" class="form-control" placeholder="New Password" autofocus="">
+                                </div>
+                            </div>
+                            <br>
+                             <div class="row">
+                                <div class="col-md-5">
+                                <label>Re-Type Password</label>
+                                </div>
+                                <div class="col-md-7">
+                                <input type="password" ng-model="rePassword" class="form-control" placeholder="Re-type New Password" autofocus="">
+                                </div>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn" >Change Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

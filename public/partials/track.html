@@ -1,0 +1,52 @@
+<div class="row">
+	<div class="col-md-2">
+		
+	</div>
+
+	<div class="col-md-8">
+	     <div class="row">
+            <div class="col-md-9">
+                
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn" ng-click="backHandle()">Back</button>  
+            </div>
+        </div>
+		<div class="all-users-container">
+
+			<center>
+			<div class="track-ip">
+				<div class="row">
+					<h2>Identified IPs </h2>
+				</div>
+				<div class="track-info">
+					<ul>
+				    	<li ng-repeat="x in ips">
+				      	{{ x }}
+				    	</li>
+				  	</ul>
+				</div>
+			</div>
+			<div class="track-page-count">
+				<div class="row">
+					<h2>Pages Viewed </h2>
+				</div>
+				<div class="track-info">
+					<div class="row">
+						All Users Page : {{ alluserCount}}	
+					</div>
+					<div class="row">
+						Profile Page : {{ profileCount}}	
+					</div>
+					<div class="row">
+						Edit Page : {{ editCount}}	
+					</div>
+					<div class="row">
+						Track Page : {{ trackCount}}	
+					</div>	
+				</div>
+			</div>
+			</center>
+		</div>
+	</div>
+</div> 
