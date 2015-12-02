@@ -1,85 +1,49 @@
-body {
-  padding-bottom: 40px;
-  background-color: #eee;
+
+#logo{
+	height: 100px;
 }
 
-table, td, th {
-    border: 2px solid black;
-    text-align: center;
-    min-width: 50px
+#title-div{
+	border: 5px solid #00688B;
 }
 
-th {
-    font-size: 20px;
-    padding: 10px;
+#nav_bar{
+	background-color: #3D2117;
 }
 
-td {
-    padding: 5px;
+#loginbox{
+	margin-top: 50px;
 }
 
-.header{
-  height: 80px;
-  background-color: #0000CC;
+#form_div{
+	padding-top: 30px; 
 }
 
-.logo-image{
-  padding-top: 10px;
-  padding-left: 10px;
-  max-height: 60px;
+#login-alert{
+	display: none; 
 }
 
-.login-container{
-  padding: 20px;
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 5px;
-  background-color: #FFFFFF;
+#form-signup{
+	display: none;
 }
 
-.all-users-container{
-  padding: 20px;
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 5px;
-  background-color: #FFFFFF;
-  text-align: center;
-  margin-left:auto;
-  margin-right:auto;
+#div_username{
+	margin-bottom: 25px; 
 }
 
-.clear{
-  min-height: 10px;
+#div_password{
+	margin-bottom: 25px; 
 }
 
-.signin-heading{
-  text-align: center;
+#signup-container{
+	padding: 100px;
 }
 
-.signin-buttons{
-  text-align: center;
+#log{
+	display: block;
 }
 
-.welcome-text{
-  font-size: 40px;
-}
-
-.profile{
-  text-align: center;
-}
-
-.change-pwd{
-  text-align: center;
-}
-
-.page-heading{
-  text-align: center;
-}
-
-.track-ip{
-
-}
-
-.track-page-count{
-  
+#panel{
+	background-color: #FEFCE8;
+	border: 2px solid #00688B;
 }
