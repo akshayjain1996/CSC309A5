@@ -7,10 +7,6 @@
 	border: 5px solid #00688B;
 }
 
-#nav{
-	display: none;
-}
-
 #nav_bar{
 	background-color: #3D2117;
 }
@@ -41,6 +37,10 @@
 
 #signup-container{
 	padding: 100px;
+}
+
+#log{
+	display: block;
 }
 
 #panel{
