@@ -279,6 +279,18 @@ module.exports = {
 		order.status = 0;//0=not accepted yet, 1=acccepted, 2=done
 		order.save();
 		res.session = session;
-		res.send({sucess: 'true', user: JSON.stringify(usr)});
+		res.send({sucess: 'true', user: JSON.stringify(order)});
 	},
+	
+	updateOrderStatus: function(req, res){
+		Order.findOne( {id : req.body.orderid}, function(err, order) {
+				if(!order) {
+					console.log("No such order exists!");
+				}
+				order.status = req.body.orderstatus;
+				order.catererid = req.body.catererid;
+				order.save();
+				console.log("Update Sucessful");
+			} );
+	},	
 }
