@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title> Login </title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body ng-app="a4" ng-controller="MainCtl">
+    <div class="header">
+        <div class="row">
+            <div class="col-md-4">
+                <img class="logo-image" src="img/logo.png" ng-click="goHome()">
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-2">
+                <button class="btn" id="logoutButton" ng-click="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
+        <div class="clear">
+            
+        </div>
+
+	<div >
+		<div ng-view>
+
+		</div>
+	</div>
+
+</body>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+    <script src="js/clientController.js"></script>
+
+</html>

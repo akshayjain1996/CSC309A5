@@ -1,0 +1,19 @@
+{
+  "name": "CRUDApp",
+  "version": "0.0.0",
+  "description": "Assignment 4 for CSC309 - 2015",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Akshay Jain",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "~4.13.3"
+  },
+  "devDependencies": {
+    "body-parser": "~1.14.1",
+    "express-session": "*",
+    "mongoose": "*"
+  }
+}
