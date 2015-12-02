@@ -275,7 +275,7 @@ module.exports = {
 		//order.placed_time
 		order.fulfillment_time = req.body.fulfillment_time;
 		order.delivery_details = req.body.delivery_details;
-		order.catererid = req.body.catererid;
+		order.catererid = req.body.catererid;// -1 = not assigned to specific caterer
 		order.status = 0;//0=not accepted yet, 1=acccepted, 2=done
 		order.save();
 		res.session = session;
@@ -293,4 +293,20 @@ module.exports = {
 				console.log("Update Sucessful");
 			} );
 	},	
+	
+	// filtered by req.body.catererid & req.body.status
+	// catererid -1 means not assigned to anyone
+	getOrders: function(req, res){
+		Order.find({status: req.body.status, catererid: req.body.catererid}, function (err, docs) {
+			if(err){
+				console.log(error);
+			} else{
+				console.log("Sending resp");
+				console.log(docs);
+				res.session = session;
+				res.send({orderList: docs});
+    		}
+    	});
+	}
+	//
 }
