@@ -364,6 +364,21 @@ app.controller('TrackCtl', function($scope, $http, $location, $route, userFactor
 
 });
 
+app.controller('allCaters', function($scope, $http,  $location, $window, userFactory, selectedFactory){
+
+	var refresh = function(){
+		$http.get('/caterers').success(function(response){
+			$scope.caterers = response; 
+		}); 
+	}
+
+	refresh(); 
+
+	$scope.view = function(id_caterer){
+		// TODO 
+	}
+});
+
 //Factory : stores the user currently logged in
 app.factory('userFactory', function(){
 	var userFactory = {};
