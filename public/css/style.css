@@ -1,0 +1,135 @@
+body {
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+table, td, th {
+    border: 2px solid black;
+    text-align: center;
+    min-width: 50px
+}
+
+th {
+    font-size: 20px;
+    padding: 10px;
+}
+
+td {
+    padding: 5px;
+}
+
+.header{
+  height: 80px;
+  background-color: #0000CC;
+}
+
+.logo-image{
+  padding-top: 10px;
+  padding-left: 10px;
+  max-height: 60px;
+}
+
+.login-container{
+  padding: 20px;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+}
+
+.all-users-container{
+  padding: 20px;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  text-align: center;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.clear{
+  min-height: 10px;
+}
+
+.signin-heading{
+  text-align: center;
+}
+
+.signin-buttons{
+  text-align: center;
+}
+
+.welcome-text{
+  font-size: 40px;
+}
+
+.profile{
+  text-align: center;
+}
+
+.change-pwd{
+  text-align: center;
+}
+
+.page-heading{
+  text-align: center;
+}
+
+.track-ip{
+
+}
+
+.track-page-count{
+  
+}
+
+
+#logo{
+  height: 100px;
+}
+
+#title-div{
+  border: 5px solid #00688B;
+}
+
+#nav_bar{
+  background-color: #3D2117;
+}
+
+#loginbox{
+  margin-top: 50px;
+}
+
+#form_div{
+  padding-top: 30px; 
+}
+
+#login-alert{
+  display: none; 
+}
+
+#form-signup{
+  display: none;
+}
+
+#div_username{
+  margin-bottom: 25px; 
+}
+
+#div_password{
+  margin-bottom: 25px; 
+}
+
+#signup-container{
+  padding: 100px;
+}
+
+#log{
+  display: block;
+}
+
+#panel{
+  background-color: #FEFCE8;
+  border: 2px solid #00688B;
+}
