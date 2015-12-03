@@ -14,33 +14,21 @@ module.exports = {
 			}else {
 				var session;
 				session = req.session;
-				var usr = new User();				
-				usr.displayname = req.body.displayname;
-				usr.username = req.body.username;
-				usr.password = req.body.password;
-				usr.description = req.body.description;
-				usr.alluserPage = 0;
-				usr.profilePage = 0;
-				usr.editPage = 0;
-				usr.trackPage = 0;
-				usr.save();
-				session.username = usr.username;
 
-				User.count({}, function(err, count) {
-					console.log(count);
-					if(count == 1){
-						console.log("New Super User made");
-						usr.permission = 0;
-						usr.save();
-					} else {
-						console.log("New User made");
-						usr.permission = 2;
-						usr.save();
-					}
-					res.session = session;
-					res.send({sucess: 'true', user: JSON.stringify(usr)});
-				});
+				var account = new Account();
 
+				var userProfile = new userProfile();
+				account.userProfile = userProfile;
+
+				account.displayname = req.body.displayname;
+				account.username = req.body.username;
+				account.password = req.body.password;
+
+				account.save();
+				session.username = account.username;
+
+				res.session = session;
+				res.send({sucess: 'true', user: JSON.stringify(account)});
 
 			}
 		});
@@ -237,28 +225,20 @@ module.exports = {
 	login : function(req, res){
 		var session;
 		session = req.session;
-		User.findOne( {username : req.body.username}, function(err, usr) {
+		Account.findOne( {username : req.body.username}, function(err, account) {
 			if(err){
 				console.log(err);
 				res.send({sucess: 'false', message: 'No such user'});
 			}
-			if(!usr) {
+			if(!account) {
 				console.log('No user Exists');
 				res.send({sucess: 'false', message: 'No such user'});
-			}else if(usr.password == req.body.password){
-				console.log(req.connection.remoteAddress);
+			} else if (account.password == req.body.password){
 
-				var ipList = usr.ip;
-				if(ipList.indexOf(req.connection.remoteAddress) < 0){
-					console.log(req.connection.remoteAddress);
-					usr.ip.push(req.connection.remoteAddress);
-				}
-				usr.save();
-
-				session.username = usr.username;
-				session.permission = usr.permission;
+				session.username = account.username;
 				res.session = session;
-				res.send({sucess: 'true', user: JSON.stringify(usr)});
+				res.send({sucess: 'true', user: JSON.stringify(account)});
+
 			}
 		});
 
