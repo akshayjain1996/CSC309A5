@@ -375,7 +375,9 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 	refresh(); 
 
 	$scope.view = function(id_caterer){
-		// TODO 
+		$http.get("/caterer/" + id_caterer).success(function(response){
+		//TODO get the details of this particular caterer from the server
+		});
 	}
 });
 
