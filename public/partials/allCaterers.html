@@ -1,0 +1,20 @@
+<div id="all_caters" class="container" ng-controller="allCaters"> 
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Caterer Name</th>
+					<th>Address</th>
+					<th>Rating</th> 
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="cater in caterers">
+					<td>{{cater.name}}</td>
+					<td>{{cater.address}}</td>
+					<td>{{cater.rating}}</td>
+					<td><button class="btn btn-primary btn-sm" ng-click="view(cater._id)">View More</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div> 
