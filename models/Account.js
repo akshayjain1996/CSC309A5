@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/db10');
 
 var UserProfile = require('./UserProfile');
+var CatererProfile = require('./CatererProfile');
 
 var userSchema = new mongoose.Schema({
   id: String,
@@ -10,7 +11,8 @@ var userSchema = new mongoose.Schema({
   aboutMe: String,
   displayname: String,
   image: String,
-  userProfile: [UserProfile]
+  userProfile: [UserProfile],
+  catererProfile: [CatererProfile]
 
 });
 

@@ -99,127 +99,12 @@ module.exports = {
 		} );	
 	},
 
-	makeAdmin : function(req, res){
-		var session;
-		session = req.session;
-		var targetUser = JSON.parse(req.body.user);
-		User.findOne( {username : targetUser.username}, function(err, usr) {
-			if(err){
-				console.log(err);
-			}
-			if(!usr) {
-				console.log('No user Exists');
-				res.session = session;
-				res.send({message: 'No such user'});
-			} else {
-				usr.permission = 1;	
-				usr.save();
-				res.session = session;
-				res.send({message: 'success'});
-				console.log("Update Sucessful");
-			}
-			
-		});
-	},
-
-	removeAdmin : function(req, res){
-		var session;
-		session = req.session;
-		var targetUser = JSON.parse(req.body.user);
-		User.findOne( {username : targetUser.username}, function(err, usr) {
-			if(err){
-				console.log(err);
-			}
-			if(!usr) {
-				console.log('No user Exists');
-				res.session = session;
-				res.send({message: 'No such user'});
-			} else {
-				usr.permission = 2;	
-				usr.save();
-				res.session = session;
-				res.send({message: 'success'});
-				console.log("Update Sucessful");
-			}
-			
-		});
-	},
-
-	deleteUser : function(req, res){
-		var session;
-		session = req.session;
-		var targetUser = JSON.parse(req.body.user);
-		User.remove( {username : targetUser.username}, function(err) {
-			if(err){
-				console.log(err);
-			} else {
-				console.log('success');
-				res.session = session;
-				res.send({message: 'Success'});
-			}
-		});
-	},
-
 	logout : function(req, res){
 		var session;
 		session = req.session;
 		res.session = null;
 		res.send({message: 'Logged out'});
 
-	},
-
-	ipList : function(req, res){
-		var session;
-		session = req.session;
-		User.findOne( {username : req.body.username}, function(err, usr) {
-			if(err){
-				console.log(err);
-				res.send({sucess: 'false', message: 'No such user'});
-			} else if(!usr) {
-				console.log('No user Exists');
-				res.send({message: 'No such user'});
-			} else {
-				console.log(usr.ip);
-			}
-		} );
-	},
-
-	pageCount : function(req, res){
-		var session;
-		session = req.session;
-		console.log("Inside track");
-		console.log(req.body.page);
-		User.findOne( {username: session.username}, function(err, usr) {
-			if(err){
-				console.log(err);
-			}else if(!usr){
-				console.log("Invalid Session");
-			} else {
-				var page = req.body.page;
-				if(page == "allusers"){
-					usr.alluserPage = usr.alluserPage + 1;
-				} else if(page == "edituser") {
-					usr.editPage = usr.editPage + 1;
-				} else if(page == "profile"){
-					usr.profilePage = usr.profilePage + 1;
-				} else if(page == "track"){
-					usr.trackPage = usr.trackPage + 1;
-				} else {
-					console.log ("Invalid page");
-				}
-				usr.save();
-			}
-		});
-		res.session =session;
-		res.send({message: 'success'});
-	},
-
-	uploadPic : function(req, res){
-		var session;
-		session = req.session;
-
-		res.session =session;
-		res.send({message: 'success'});
 	},
 
 	login : function(req, res){
@@ -242,6 +127,19 @@ module.exports = {
 			}
 		});
 
+	},
+
+	allCaterers : function(req, res){
+		Account.find({}, function(err, accounts){
+			var catererList = [];
+			for(var i = 0; i < accounts.length; i++){
+				if(accounts[i].catererProfile != null){
+					catererList.add(accounts[i]);
+				}
+			}
+
+			res.send(caterers : catererList);
+		});
 	},
 	
 	uploadProfile: function  (req, res) {
