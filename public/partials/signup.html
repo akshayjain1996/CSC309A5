@@ -1,59 +1,29 @@
-<div id="signup-container" class="container">    
-    <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-        <div id="panel" class="panel" >
-                <div class="panel-heading">
-                    <div class="panel-title">Please sign in:</div>
-                </div>     
+<div class="row">
+	<div class="col-md-4">
+		
+	</div>
 
-                <div id="form_div" class="panel-body" >
+	<div class="col-md-4">
+		<div class='message' id='message'></div>
+		<div class="login-container">
+			<form ng-submit="submit()">
+    			<h2 class="signin-heading">Sign Up</h2>
+				<br>    
+		        <input ng-model="displayname" class="form-control" placeholder="DisplayName" autofocus="">
+		        <br>
+		        <input ng-model="username" class="form-control" placeholder="Email address" autofocus="">
+		        <br>
+		        <input type="password" ng-model="password" class="form-control" placeholder="Password" autofocus="">
+		        <br>
+		        <input type="re-password" ng-model="password" class="form-control" placeholder="Retype Password" autofocus="">
+		        <br>
+    			<div class="signin-buttons">
+					<button type="submit" class="btn" >Sign up</button>
+			  	</div>
 
-                    <div id="login-alert" class="alert alert-danger col-sm-12"></div>
+			  </form>
 
-                        <div id="form-signup" class="panel-body">
-                          <form id="loginform" class="form-horizontal" role="form">         
-                            <div id="divsi_username" class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                              <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Enter email here.">   
-                            </div>
+		</div>
 
-                            <div id="divsi_password" class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="login-password" type="password" class="form-control" name="password" placeholder="Enter your password here.">
-                            </div>
-
-                            <div id="divsi_conpassword" class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="login-password" type="password" class="form-control" name="password" placeholder="Confirm your password.">
-                            </div>
-
-                            <div class="col-sm-12 controls">
-                                <button id="btn-signuphere" onclick="signup()" class="btn btn-info">Signup</button>
-                                <button id="btn-back" onclick="goBack()" class="btn btn-info">Back</button>
-                            </div> 
-                          </form>
-                        </div>
-                           
-                        <div id="log" class="panel-body"> 
-                        <form id="loginform" class="form-horizontal" role="form">         
-                            <div id="div_username" class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                              <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Enter email here.">   
-                            </div>
-
-                            <div id="div_password" class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="login-password" type="password" class="form-control" name="password" placeholder="Enter your password here.">
-                            </div>
-                        </form>
-
-                         <div class="col-sm-12 controls">
-                            <button id="btn-login" onclick="login()" class="btn btn-info">Login</button>
-                            <button id="btn-signup" onclick="goSignup()" class="btn btn-info">Signup</button>
-                            <button id="btn-proceed" onclick="goHome()" class="btn btn-info">Proceed without signup</button>
-                         </div> 
-
-                        </div>
-                </div>                     
-        </div>  
-    </div>
-</div>
+	</div>
+</div> 

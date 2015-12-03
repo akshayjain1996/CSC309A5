@@ -1,7 +1,8 @@
-var User = require('../models/user');
-var Order = require('../models/order');
+var User = require('../models/Account');
+var Order = require('../models/Order');
 
 module.exports = {
+	
 	addUser : function(req, res){
 		User.findOne( {username : req.body.username}, function(err, docs) {
 			if(err) {
