@@ -1,4 +1,4 @@
-//var controller = require('../controllers/controller');
+var controller = require('../controllers/controller');
 
 module.exports = function(app) {
 
@@ -6,7 +6,7 @@ module.exports = function(app) {
 		console.log("index")
 		res.sendfile("./views/index.html");
 	});
-	
+
 	app.post('/signup', controller.addUser);
 
 
