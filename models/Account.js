@@ -1,20 +1,19 @@
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/db10');
 
+var CatererProfile = require('./CatererProfile');
+var UserProfile = require('./UserProfile');
+
 var userSchema = new mongoose.Schema({
+  id: String,
   username: String,
   password: String,
-  permission: Number,
-  description: String,
+  aboutMe: String,
   displayname: String,
   image: String,
-  ip: [String],
-  alluserPage: Number,
-  profilePage: Number,
-  editPage: Number,
-  trackPage: Number
+  catererProfile: CatererProfile,
+  userProfile: UserProfile
 
-  
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -1,6 +1,8 @@
-var User = require('../models/user');
+var User = require('../models/Account');
+var Order = require('../models/Order');
 
 module.exports = {
+	
 	addUser : function(req, res){
 		User.findOne( {username : req.body.username}, function(err, docs) {
 			if(err) {
@@ -260,5 +262,74 @@ module.exports = {
 			}
 		});
 
+	},
+	
+	uploadProfile: function  (req, res) {
+		if(req.method === 'GET')
+			return res.json({'status':'GET not allowed'});
+
+		var uploadFile = req.file('uploadFile');
+
+	    uploadFile.upload({ dirname: '/public/img/profile'},function onUploadComplete (err, files) {
+	    																		
+	    	if (err) return res.serverError(err);
+			var fullName = files[0].fd;
+			var arr = fullName.split("\\");
+			User.update({id: req.body.catererid}, {profile_img_link: (arr[arr.length - 1])}).exec(function cb(err){
+				});
+	    });
+	},
+	/*
+	Order functions below
+	*/
+	
+	addOrder : function(req, res){
+		var session;
+		session = req.session;
+		var order = new Order();				
+		order.details = req.body.details;
+		order.contact_info = req.body.contact_info;
+		//order.placed_time
+		order.fulfillment_time = req.body.fulfillment_time;
+		order.delivery_details = req.body.delivery_details;
+		order.catererid = req.body.catererid;// -1 = not assigned to specific caterer
+		order.status = 0;//0=not accepted yet, 1=acccepted, 2=done
+		order.save();
+		res.session = session;
+		res.send({sucess: 'true', user: JSON.stringify(order)});
+	},
+	
+	updateOrderStatus: function(req, res){
+		Order.findOne( {id : req.body.orderid}, function(err, order) {
+				if(!order) {
+					console.log("No such order exists!");
+				}
+				order.status = req.body.orderstatus;
+				order.catererid = req.body.catererid;
+				order.save();
+				console.log("Update Sucessful");
+			} );
+	},	
+	
+	// filtered by req.body.catererid & req.body.status
+	// catererid -1 means not assigned to anyone
+	getOrders: function(req, res){
+		Order.find({status: req.body.status, catererid: req.body.catererid}, function (err, docs) {
+			if(err){
+				console.log(error);
+			} else{
+				console.log("Sending resp");
+				console.log(docs);
+				res.session = session;
+				res.send({orderList: docs});
+    		}
+    	});
+	},
+	
+	//when an order is rejected add it to the pool of orders that have not been picked up by anybody
+	rejectOrder: function(req, res){
+		req.body.orderstatus = 0;
+		req.body.catererid = -1;
+		updateOrderStatus(req, res);
 	}
 }

@@ -6,10 +6,11 @@ module.exports = function(app) {
 		console.log("index")
 		res.sendfile("./views/index.html");
 	});
-
-/*
+	
 	app.post('/signup', controller.addUser);
 
+
+/*
 	app.post('/login', controller.login);
 
 	app.get('/userlist', controller.allUsers);
