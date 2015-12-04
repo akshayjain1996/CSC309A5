@@ -1,26 +1,53 @@
-<div class="row">
-	<div class="col-md-4">
-		
-	</div>
+<head>
+<title>Update Profile</title>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-	<div class="col-md-4">
-		<div class="login-container">
-			<form>
-    			<h2 class="updatecaterer-heading">Update Profile</h2>
+</head>
+
+<div class="row">
+	<div class="col-md-3">
+	</div>
+	
+
+	<div class="col-md-6">
+		<img id="updateLogo" src="../images/Logo.png" style="width:400px;height:100px;">	
+	<br>
+		<form>
+    		<h3 class="updatecaterer-heading">Update Profile: DispName</h3><br>
+    		<h4 class="updatecaterer-heading">Personal information</h4>
+    		<input ng-model="username" class="form-control" placeholder="Display Name" autofocus=""><br>
+    		<div class="form-group">
+        	<label for="comment">Description:</label>
+       		 <textarea class="form-control" rows="5" id="commentAd" maxlength="499"></textarea>
+      			</div>
+      	</form>
+      </div> 
+    </div>
+    <div class="col-md-3">
+	</div>
+	<div class="col-md-6">
+    			<h4 class="updatecaterer-heading">Moved Locations? Keep you account updated.</h4>
     			<input ng-model="username" class="form-control" placeholder="Update Address" autofocus="">
     			<br>
-    			<input ng-model="cuisine" class="form-control" placeholder="Add Cuisine" autofocus="">
+    			<button class="btn" ng-click="#">Update Address</button><br>
+    			<h4 class="updatecaterer-cusinehead">Can cook a new type of cuisine? Add it now!</h4>
+    			<input ng-model="cuisine" class="form-control" placeholder="Add Cuisine" autofocus=""><br>
+    			<button class="btn" ng-click="#">Add Cuisine Type</button>
     			<br>
-    			<input type="password" ng-model="password" class="form-control" placeholder="Update Password">
+    			<h4 class="updatecaterer-changePass">Update password</h4><br>
+    			<input type="password" ng-model="password" class="form-control" placeholder="Old Password">
     			<br>
-    			<div class="signin-buttons">
-			    <button class="btn" ng-click="login()">Sign in</button>
-			    <button class="btn" ng-click="signup()">Sign up</button>
+    			<input type="password" ng-model="password" class="form-control" placeholder="New Password">
+    			<br>
+    			<input type="password" ng-model="password" class="form-control" placeholder="Confirm Password">
+    			<br>
+			    <button class="btn" ng-click="signup()">Change Password</button>
 			  	</div>
 			  </form>
-
+			</div>
+//price range speciality
 		</div>
 
 	</div>
-</div> 
+
 
