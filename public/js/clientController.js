@@ -21,12 +21,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 			templateUrl: 'partials/signup.html',
 			controller: 'SignupCtl'
 		})
-
+	
 		.when('/allCaterers', {
 			templateUrl: 'partials/allCaterers.html',
 			controller: 'allCaters'	
 		})
-
+	
 		.when('/profile', {
 			templateUrl: 'partials/profile.html',
 			controller: 'ProfileCtl'
@@ -45,6 +45,16 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		.when('/editUser', {
 			templateUrl: 'partials/editUser.html',
 			controller: 'EditCtl'
+		})
+
+		.when('/userdash', {
+			templateUrl: 'partials/updateCaterer.html', 
+			controller: 'user-dash'
+		})
+
+		.when('/catererDash', {
+			templateUrl: 'partials/catererDashboard.html', 
+			controller: 'catererDashboard'
 		});
 
 	$locationProvider.html5Mode(true);
@@ -377,6 +387,20 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 		}
 
 	}
+});
+
+app.controller('user-dash', function($scope, $http,  $location, $window, userFactory){
+
+	//TODO
+
+});
+
+app.controller('catererDashboard', function($scope, $http,  $location, $window, userFactory){
+
+	
+
+	refresh(); 
+
 });
 
 //Factory : stores the user currently logged in

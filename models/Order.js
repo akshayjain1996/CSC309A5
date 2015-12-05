@@ -1,4 +1,15 @@
 var mongoose = require('mongoose');
+
+
+/* 
+Status:
+	1 - Placed
+	2 - Accepted
+	3 - Completed
+
+*/
+
+
 var orderSchema = new mongoose.Schema({
 	
 	id: Number,
