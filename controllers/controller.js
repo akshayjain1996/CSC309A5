@@ -13,9 +13,11 @@ module.exports = {
 				console.log('user already exists');
 				res.send({sucess: 'false', message: 'User already exists!'});
 			}else {
+				console.log("reached");
 				var session;
 				session = req.session;
-
+			
+				var account = new User();
 				var account = new Account();
 
 				var userProfile = new UserProfile();
@@ -30,7 +32,7 @@ module.exports = {
 
 				res.session = session;
 				res.send({sucess: 'true', user: JSON.stringify(account)});
-
+				
 			}
 		});
 

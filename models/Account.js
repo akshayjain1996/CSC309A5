@@ -4,8 +4,7 @@ mongoose.connect('mongodb://localhost/db11');
 var UserProfile = require('./UserProfile');
 var CatererProfile = require('./CatererProfile');
 
-var userSchema = new mongoose.Schema({
-  id: String,
+var userSchema = new mongoose.Schema({	
   username: String,
   password: String,
   aboutMe: String,
