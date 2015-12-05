@@ -22,7 +22,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 			controller: 'SignupCtl'
 		})
 
-		.when('/allusers', {
+		.when('/allCaters', {
 			templateUrl: 'partials/allusers.html',
 			controller: 'AllUsersCtl'	
 		})
@@ -73,7 +73,7 @@ app.controller('LoginCtl', function($scope, $http, $location, $route, $window, u
 		$http.post('login', {username: $scope.username, password: $scope.password}).success(function (response){
 			if(response.sucess == 'true'){
 				userFactory.setUser(JSON.parse(response.user));
-				$location.path('/allusers');
+				$location.path('/allCaters');
 			} else {
 				$window.alert("Invalid Login/Password");
 			}
@@ -87,11 +87,11 @@ app.controller('LoginCtl', function($scope, $http, $location, $route, $window, u
 });
 
 //controller for Signup page
-app.controller('SignupCtl', function($scope, $http, $location, $window, userFactory) {
+app.controller('SignupCtl', function($scope, $http, $location, $window) {
 
 	$scope.submit = function() {
 
-		if($scope.password != $scope.re-password){
+		if($scope.password != $scope.repassword){
 
 		} else {
 
@@ -100,7 +100,7 @@ app.controller('SignupCtl', function($scope, $http, $location, $window, userFact
 			.success(function(response) {
 				if(response.sucess == 'true'){
 					userFactory.setUser(JSON.parse(response.user));
-					$location.path('/allusers');
+					$location.path('/allCaters');
 				} else {
 					document.getElementById("message").innerHTML = response.message;
 				}
