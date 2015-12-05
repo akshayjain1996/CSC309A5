@@ -48,7 +48,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		})
 
 		.when('/userdash', {
-			templateUrl: 'partials/user_dashboard.html', 
+			templateUrl: 'partials/updateCaterer.html', 
 			controller: 'user-dash'
 		})
 
@@ -386,13 +386,7 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 
 app.controller('user-dash', function($scope, $http,  $location, $window, userFactory){
 
-	var refresh = function(){
-		$http.get('/users').success(function(response){
-			$scope.users = users; 
-		}); 
-	}
-
-	refresh(); 
+	//TODO
 
 });
 
