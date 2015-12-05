@@ -1,65 +1,70 @@
-<head>
-<title>Caterer Dashboard</title>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<div id="all_caters" class="container" ng-controller="catererDashboard"> 
 
-</head>
-<body>
-<div class="row">
-	<div class="col-md-3">
-	</div>
-	<div class="col-md-6">
-		<img id="updateLogo" src="../images/Logo.png" style="width:400px;height:100px;">	
-	</div>
+    <button class="btn btn-primary btn-sm" ng-click="profile()">Profile</button>
+    <button class="btn btn-primary btn-sm" ng-click="dashboard()">Caterer Dashboard</button>
+
+    <p> New Orders</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Caterer Name</th>
+                <th>Address</th>
+                <th>Rating</th> 
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="order in newOrder">
+                <td>{{cater.displayname}}</td>
+                <td>{{cater.username}}</td>
+                <td>{{cater.rating}}</td>
+                <td><button class="btn btn-primary btn-sm" ng-click="view(cater._id)">View More</button></td>
+            </tr>
+        </tbody>
+    </table>
+
     <br>
-</div>
 
-<div class="row">
-    <div class="col-md-1">
-    </div>
-     <div class="col-md-4">
-        <h1>Welcome: Caterer</h1>
-    </div>
-    <div class="col-md-1">
-    </div>
-    <div class="col-md-4">
-        <a href="updateCaterer.html">
-        <button type="button" href="updateCaterer.html" class="btn btn-primary btn-block">Update Profile</button>
-    </a>
-    </div>
-    <div class="col-md-2">
-    </div>    
-</div>
+    <p> Pending Orders</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Caterer Name</th>
+                <th>Address</th>
+                <th>Rating</th> 
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="order in pending">
+                <td>{{cater.displayname}}</td>
+                <td>{{cater.username}}</td>
+                <td>{{cater.rating}}</td>
+                <td><button class="btn btn-primary btn-sm" ng-click="view(cater._id)">View More</button></td>
+            </tr>
+        </tbody>
+    </table>
 
-<div class="row">
-    <div class="col-md-1">
-    </div> 
-    <div class="col-md-4">
-    <h3>Your Catering Requests:</h3>
-    </div>  
-</div>
-<div class="row">
-   <div class="col-md-1">
-    </div>
-    <div class="col-md-3">
-        <h3>New Requests</h3>
-    </div> 
-    <div class="col-md-3">
-        <h3>Pending Requests</h3>
-    </div>
-    <div class="col-md-3">
-        <h3>Completed Requests</h3>
-    </div>
-</div>
-<br>
-<div class="row">
-<div class="col-md-1">
-    </div> 
-    <div class="col-md-4">
-    <h3>Reviews:</h3>
-    </div>  
-</div>
-</body>
+    <br>
 
-	
-
+    <p> Completed Orders</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Caterer Name</th>
+                <th>Address</th>
+                <th>Rating</th> 
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="order in completed">
+                <td>{{cater.displayname}}</td>
+                <td>{{cater.username}}</td>
+                <td>{{cater.rating}}</td>
+                <td><button class="btn btn-primary btn-sm" ng-click="view(cater._id)">View More</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div> 
 

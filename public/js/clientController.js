@@ -52,6 +52,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 			controller: 'user-dash'
 		})
 
+		.when('/catererDash', {
+			templateUrl: 'partials/catererDashboard.html', 
+			controller: 'catererDashboard'
+		});
+
 	$locationProvider.html5Mode(true);
 
 }]);
@@ -387,6 +392,14 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 app.controller('user-dash', function($scope, $http,  $location, $window, userFactory){
 
 	//TODO
+
+});
+
+app.controller('catererDashboard', function($scope, $http,  $location, $window, userFactory){
+
+	
+
+	refresh(); 
 
 });
 
