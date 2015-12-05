@@ -9,10 +9,12 @@ module.exports = function(app) {
 
 	app.post('/signup', controller.addUser);
 
+	app.get('/caterers', controller.allCaterers);
 
-/*
+
+
 	app.post('/login', controller.login);
-
+/*
 	app.get('/userlist', controller.allUsers);
 
 	app.post('/editProfile', controller.editProfile);
@@ -31,4 +33,4 @@ module.exports = function(app) {
 
 	app.post('/uploadPic', controller.uploadPic);
 	*/
-}
+};
