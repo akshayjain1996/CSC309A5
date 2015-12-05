@@ -1,10 +1,11 @@
-var User = require('../models/Account');
+var Account = require('../models/Account');
 var Order = require('../models/Order');
+var UserProfile = require('../models/UserProfile');
 
 module.exports = {
 	
 	addUser : function(req, res){
-		User.findOne( {username : req.body.username}, function(err, docs) {
+		Account.findOne( {username : req.body.username}, function(err, docs) {
 			if(err) {
 				console.log('user already exists');
 				res.send({sucess: 'false', message: 'User already exists!'});
@@ -17,7 +18,7 @@ module.exports = {
 
 				var account = new Account();
 
-				var userProfile = new userProfile();
+				var userProfile = new UserProfile();
 				account.userProfile = userProfile;
 
 				account.displayname = req.body.displayname;
@@ -110,6 +111,7 @@ module.exports = {
 	login : function(req, res){
 		var session;
 		session = req.session;
+		console.log( req.body.username);
 		Account.findOne( {username : req.body.username}, function(err, account) {
 			if(err){
 				console.log(err);
@@ -138,7 +140,7 @@ module.exports = {
 				}
 			}
 
-			res.send(caterers : catererList);
+			res.send({caterers : JSON.stringify(catererList)});
 		});
 	},
 	

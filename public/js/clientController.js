@@ -22,11 +22,6 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 			controller: 'SignupCtl'
 		})
 
-		.when('/allCaters', {
-			templateUrl: 'partials/allusers.html',
-			controller: 'AllUsersCtl'	
-		})
-
 		.when('/profile', {
 			templateUrl: 'partials/profile.html',
 			controller: 'ProfileCtl'
@@ -35,6 +30,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		.when('/track', {
 			templateUrl: 'partials/track.html',
 			controller: 'TrackCtl'
+		})
+
+		.when('/caterers', {
+			templateUrl: 'partials/allCaterers.html',
+			controller: 'allCaters'
 		})
 
 		.when('/editUser', {
@@ -67,13 +67,12 @@ app.controller('MainCtl', function($scope, $http, $location, $route, userFactory
 });
 
 //Controller for login page
-app.controller('LoginCtl', function($scope, $http, $location, $route, $window, userFactory) {
+app.controller('LoginCtl', function($scope, $http, $location, $route, $window) {
 
 	$scope.login = function() {
 		$http.post('login', {username: $scope.username, password: $scope.password}).success(function (response){
 			if(response.sucess == 'true'){
-				userFactory.setUser(JSON.parse(response.user));
-				$location.path('/allCaters');
+				$location.path('/caterers');
 			} else {
 				$window.alert("Invalid Login/Password");
 			}
@@ -99,8 +98,7 @@ app.controller('SignupCtl', function($scope, $http, $location, $window) {
 				{displayname: $scope.displayname, username: $scope.username, password: $scope.password})
 			.success(function(response) {
 				if(response.sucess == 'true'){
-					userFactory.setUser(JSON.parse(response.user));
-					$location.path('/allCaters');
+					$location.path('/caterers');
 				} else {
 					document.getElementById("message").innerHTML = response.message;
 				}

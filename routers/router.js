@@ -12,9 +12,9 @@ module.exports = function(app) {
 	app.get('/caterers', controller.allCaterers);
 
 
-/*
-	app.post('/login', controller.login);
 
+	app.post('/login', controller.login);
+/*
 	app.get('/userlist', controller.allUsers);
 
 	app.post('/editProfile', controller.editProfile);

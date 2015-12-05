@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/db10');
+mongoose.connect('mongodb://localhost/db11');
 
 var UserProfile = require('./UserProfile');
 var CatererProfile = require('./CatererProfile');

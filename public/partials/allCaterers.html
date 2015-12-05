@@ -10,8 +10,8 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="cater in caterers">
-					<td>{{cater.name}}</td>
-					<td>{{cater.address}}</td>
+					<td>{{cater.displayname}}</td>
+					<td>{{cater.username}}</td>
 					<td>{{cater.rating}}</td>
 					<td><button class="btn btn-primary btn-sm" ng-click="view(cater._id)">View More</button></td>
 				</tr>
