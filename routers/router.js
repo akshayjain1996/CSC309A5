@@ -9,10 +9,14 @@ module.exports = function(app) {
 
 	app.post('/signup', controller.addUser);
 
+	app.get('/caterers', controller.allCaterers);
 
-/*
+
+
 	app.post('/login', controller.login);
 
+	app.post('/makeCaterer', controller.makeCaterer);
+/*
 	app.get('/userlist', controller.allUsers);
 
 	app.post('/editProfile', controller.editProfile);
