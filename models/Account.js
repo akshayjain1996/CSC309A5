@@ -15,7 +15,7 @@ var accountSchema = new mongoose.Schema({
   password: String,
   aboutMe: String,
   displayname: String,
-  image: String,
+  image: String, 
   catererProfile: {
   	  priceRange: Number,
 	  tags: [String],
@@ -24,6 +24,10 @@ var accountSchema = new mongoose.Schema({
 	  speciality: [String],
 	  address: String,
 	  reviews: [Number]
+  },
+  userProfile: {
+  	 follows: [String], 
+ 	 favs: [String], 
   },
 
 });
