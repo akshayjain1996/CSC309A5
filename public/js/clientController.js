@@ -75,6 +75,7 @@ app.controller('MainCtl', function($scope, $http, $location, $route, userFactory
 app.controller('LoginCtl', function($scope, $http, $location, $route, $window) {
 
 	$scope.login = function() {
+		console.log($scope.username);
 		$http.post('login', {username: $scope.username, password: $scope.password}).success(function (response){
 			if(response.sucess == 'true'){
 				$location.path('/caterers');

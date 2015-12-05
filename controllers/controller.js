@@ -13,19 +13,15 @@ module.exports = {
 				console.log('user already exists');
 				res.send({sucess: 'false', message: 'User already exists!'});
 			}else {
-				console.log("reached");
 				var session;
 				session = req.session;
-			
-				var account = new User();
-				var account = new Account();
 
-				var userProfile = new UserProfile();
-				account.userProfile = userProfile;
+				var account = new Account();
 
 				account.displayname = req.body.displayname;
 				account.username = req.body.username;
 				account.password = req.body.password;
+				account.type = 1;
 
 				account.save();
 				session.username = account.username;
@@ -135,10 +131,11 @@ module.exports = {
 
 	allCaterers : function(req, res){
 		Account.find({}, function(err, accounts){
+			console.log(accounts);
 			var catererList = [];
 			for(var i = 0; i < accounts.length; i++){
-				if(accounts[i].catererProfile != null){
-					catererList.add(accounts[i]);
+				if(accounts[i].type == 2){
+					catererList.push(accounts[i]);
 				}
 			}
 

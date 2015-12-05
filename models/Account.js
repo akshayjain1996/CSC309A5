@@ -1,18 +1,31 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/db11');
+mongoose.connect('mongodb://localhost/db12');
 
-var UserProfile = require('./UserProfile');
-var CatererProfile = require('./CatererProfile');
+/*
+Type:
+	1 - User
+	2 - Caterer
+	3 - Admin
 
-var userSchema = new mongoose.Schema({	
+*/
+
+var accountSchema = new mongoose.Schema({
+  type: Number,	
   username: String,
   password: String,
   aboutMe: String,
   displayname: String,
   image: String,
-  userProfile: [UserProfile],
-  catererProfile: [CatererProfile]
+  catererProfile: {
+  	  priceRange: Number,
+	  tags: [String],
+	  orders: [Number],
+	  rating: Number,
+	  speciality: [String],
+	  address: String,
+	  reviews: [Number]
+  },
 
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Account', accountSchema);
