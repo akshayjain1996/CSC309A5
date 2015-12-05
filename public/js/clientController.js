@@ -10,7 +10,7 @@ app.config(['$locationProvider', function($locationProvider){
 // App Routing
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
-	$routeProvider
+	$routeProvider	
 
 		.when('/', {
 			templateUrl: 'partials/login.html',
@@ -22,9 +22,9 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 			controller: 'SignupCtl'
 		})
 
-		.when('/allCaters', {
-			templateUrl: 'partials/allusers.html',
-			controller: 'AllUsersCtl'	
+		.when('/allCaterers', {
+			templateUrl: 'partials/allCaterers.html',
+			controller: 'allCaters'	
 		})
 
 		.when('/profile', {
@@ -51,7 +51,7 @@ app.controller('MainCtl', function($scope, $http, $location, $route, userFactory
 	
 	$scope.goHome = function(){
 		if(userFactory.getUser()) {
-			$location.path('/allusers');
+			$location.path('/allCaterers');
 		} else {
 			$location.path('/');
 		}
@@ -73,7 +73,7 @@ app.controller('LoginCtl', function($scope, $http, $location, $route, $window, u
 		$http.post('login', {username: $scope.username, password: $scope.password}).success(function (response){
 			if(response.sucess == 'true'){
 				userFactory.setUser(JSON.parse(response.user));
-				$location.path('/allCaters');
+				$location.path('/allCaterers');
 			} else {
 				$window.alert("Invalid Login/Password");
 			}
@@ -87,20 +87,20 @@ app.controller('LoginCtl', function($scope, $http, $location, $route, $window, u
 });
 
 //controller for Signup page
-app.controller('SignupCtl', function($scope, $http, $location, $window) {
+app.controller('SignupCtl', function($scope, $http, $location, $window, userFactory) {
 
 	$scope.submit = function() {
 
 		if($scope.password != $scope.repassword){
-
+			alert("Passwords mismatch. Please try again."); 
 		} else {
 
-			$http.post('signup', 
+			$http.post('/signup', 
 				{displayname: $scope.displayname, username: $scope.username, password: $scope.password})
 			.success(function(response) {
 				if(response.sucess == 'true'){
 					userFactory.setUser(JSON.parse(response.user));
-					$location.path('/allCaters');
+					$location.path('/allCaterers');
 				} else {
 					document.getElementById("message").innerHTML = response.message;
 				}

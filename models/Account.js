@@ -3,8 +3,7 @@ mongoose.connect('mongodb://localhost/db10');
 
 var UserProfile = require('./UserProfile');
 
-var userSchema = new mongoose.Schema({
-  id: String,
+var userSchema = new mongoose.Schema({	
   username: String,
   password: String,
   aboutMe: String,

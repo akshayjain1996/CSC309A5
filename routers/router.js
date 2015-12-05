@@ -31,4 +31,4 @@ module.exports = function(app) {
 
 	app.post('/uploadPic', controller.uploadPic);
 	*/
-}
+};
