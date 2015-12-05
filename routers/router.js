@@ -3,7 +3,7 @@ var controller = require('../controllers/controller');
 module.exports = function(app) {
 
 	app.get('/', function (req, res) {
-		console.log("index")
+		console.log("index");
 		res.sendfile("./views/index.html");
 	});
 
@@ -11,9 +11,9 @@ module.exports = function(app) {
 
 	app.get('/caterers', controller.allCaterers);
 
-
-
 	app.post('/login', controller.login);
+
+	app.post('/makeCaterer', controller.makeCaterer);
 /*
 	app.get('/userlist', controller.allUsers);
 

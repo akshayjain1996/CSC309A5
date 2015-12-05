@@ -72,12 +72,14 @@ app.controller('MainCtl', function($scope, $http, $location, $route, userFactory
 });
 
 //Controller for login page
-app.controller('LoginCtl', function($scope, $http, $location, $route, $window) {
+app.controller('LoginCtl', function($scope, $http, $location, $route, $window, userFactory) {
 
 	$scope.login = function() {
 		console.log($scope.username);
 		$http.post('login', {username: $scope.username, password: $scope.password}).success(function (response){
 			if(response.sucess == 'true'){
+				console.log(response.user);
+				userFactory.setUser(JSON.parse(response.user));
 				$location.path('/caterers');
 
 			} else {
@@ -105,6 +107,7 @@ app.controller('SignupCtl', function($scope, $http, $location, $window, userFact
 				{displayname: $scope.displayname, username: $scope.username, password: $scope.password})
 			.success(function(response) {
 				if(response.sucess == 'true'){
+					userFactory.setUser(JSON.parse(response.user));
 					$location.path('/caterers');
 				} else {
 					document.getElementById("message").innerHTML = response.message;
@@ -116,7 +119,7 @@ app.controller('SignupCtl', function($scope, $http, $location, $window, userFact
 });
 
 //Controller for page that displays all users
-app.controller('AllUsersCtl', function($scope, $http, $location, userFactory,selectedFactory) {
+app.controller('AllUsersCtl', function($scope, $http, $location, userFactory) {
 
 	$http.post('tracker', {page : "allusers"}).success(function (response){
 		console.log("return ngResource")
@@ -334,46 +337,14 @@ app.controller('ProfileCtl', function($scope, $http, $location, $window, userFac
 
 });
 
-//Controller for tracking page
-app.controller('TrackCtl', function($scope, $http, $location, $route, userFactory, selectedFactory) {
+app.controller('allCaters', function($scope, $http,  $location, $window, userFactory){
 
-	$http.post('tracker', {page : "track"}).success(function (response){
-		var u = userFactory.getUser();
-		u.trackPage = u.trackPage + 1;
-		userFactory.setUser(u);
-	});
-
-	var user = userFactory.getUser();
-	var selectedUser = selectedFactory.getUser();
-
-	if(!userFactory.getUser()) {
-		console.log("User is null");
-		$location.path('/');
-	} 
-	
-	if(!selectedFactory.getUser()) {
-		console.log("Selected User is null");
-		$location.path('/');
-	} 
-
-
-	$scope.alluserCount = selectedUser.alluserPage;
-	$scope.profileCount = selectedUser.profilePage;
-	$scope.editCount = selectedUser.editPage;
-	$scope.trackCount = selectedUser.trackPage;
-	$scope.ips = selectedUser.ip;
-
-	$scope.backHandle = function(){
-		$location.path('/profile');
-	}
-
-});
-
-app.controller('allCaters', function($scope, $http,  $location, $window, userFactory, selectedFactory){
+	var usr = userFactory.getUser();
 
 	var refresh = function(){
 		$http.get('/caterers').success(function(response){
-			$scope.caterers = response; 
+			console.log(response.caterers);
+			$scope.caterers = JSON.parse(response.caterers); 
 		}); 
 	}
 
@@ -383,6 +354,28 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 		$http.get("/caterer/" + id_caterer).success(function(response){
 		//TODO get the details of this particular caterer from the server
 		});
+	}
+
+	$scope.profile = function(){
+
+	}
+
+	$scope.dashboard = function(){
+		if(usr.type == 1){
+			$http.post('makeCaterer', {user: JSON.stringify(usr)}).success(function (response){
+				if(response.sucess = 'true'){
+					$window.alert("you are now registered as a caterer");
+					userFactory.setUser(JSON.parse(response.user));
+					console.log(JSON.parse(response.user));
+
+				}else {
+					$window.alert("somethings not right");
+				}
+			});
+		} else {
+
+		}
+
 	}
 });
 
@@ -402,19 +395,4 @@ app.factory('userFactory', function(){
 	return userFactory;
 });
 
-//Factory : stores the user selected when changing view.
-app.factory('selectedFactory', function(){
-	var selectedFactory = {};
-	var selectedUser = null;
-
-	selectedFactory.setUser = function(usr) {
-		selectedUser = usr;
-	};
-
-	selectedFactory.getUser = function(usr) {
-		return selectedUser;
-	}
-
-	return selectedFactory;
-});
 

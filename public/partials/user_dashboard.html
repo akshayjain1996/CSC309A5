@@ -1,0 +1,22 @@
+<div id="user_dash" class="container" ng-controller="user-dash"> 
+	<div class="col-md-4">
+
+		Image
+
+	</div>
+	
+	<div class="col-md-4">
+		<div class="container">
+			<dl class="dl-horizontal" ng-repeat="user in users">
+ 				 <dt>Name: </dt>
+ 				 <dt> Description: </dt>
+ 				 <dt> Following: </dt>
+ 				 <dt> Favorite Dishes: </dt> 
+ 				 <dd>user.displayname</dd>
+ 				 <dd>user.aboutMe</dd>
+ 				 <dd>user.follows</dd>
+ 				 <dd>user.favs</dd>
+			</dl>
+		</div>
+	</div>
+</div>
