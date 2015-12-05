@@ -3,15 +3,13 @@ var controller = require('../controllers/controller');
 module.exports = function(app) {
 
 	app.get('/', function (req, res) {
-		console.log("index")
+		console.log("index");
 		res.sendfile("./views/index.html");
 	});
 
 	app.post('/signup', controller.addUser);
 
 	app.get('/caterers', controller.allCaterers);
-
-
 
 	app.post('/login', controller.login);
 

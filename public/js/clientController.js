@@ -83,6 +83,7 @@ app.controller('LoginCtl', function($scope, $http, $location, $route, $window, u
 		console.log($scope.username);
 		$http.post('login', {username: $scope.username, password: $scope.password}).success(function (response){
 			if(response.sucess == 'true'){
+				console.log(response.user);
 				userFactory.setUser(JSON.parse(response.user));
 				$location.path('/caterers');
 
@@ -123,7 +124,7 @@ app.controller('SignupCtl', function($scope, $http, $location, $window, userFact
 });
 
 //Controller for page that displays all users
-app.controller('AllUsersCtl', function($scope, $http, $location, userFactory,selectedFactory) {
+app.controller('AllUsersCtl', function($scope, $http, $location, userFactory) {
 
 	$http.post('tracker', {page : "allusers"}).success(function (response){
 		console.log("return ngResource")
@@ -343,9 +344,12 @@ app.controller('ProfileCtl', function($scope, $http, $location, $window, userFac
 
 app.controller('allCaters', function($scope, $http,  $location, $window, userFactory){
 
+	var usr = userFactory.getUser();
+
 	var refresh = function(){
 		$http.get('/caterers').success(function(response){
-			$scope.caterers = response; 
+			console.log(response.caterers);
+			$scope.caterers = JSON.parse(response.caterers); 
 		}); 
 	}
 
@@ -362,16 +366,19 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 	}
 
 	$scope.dashboard = function(){
-		if(userFactory.getUser.type != 1){
-			http.post('makeCaterer', {user: JSON.stringify(userFactory.getUser)}).success(function(response) {
+		if(usr.type == 1){
+			$http.post('makeCaterer', {user: JSON.stringify(usr)}).success(function (response){
 				if(response.sucess = 'true'){
 					$window.alert("you are now registered as a caterer");
 					userFactory.setUser(JSON.parse(response.user));
+					console.log(JSON.parse(response.user));
 
 				}else {
 					$window.alert("somethings not right");
 				}
 			});
+		} else {
+
 		}
 
 	}
