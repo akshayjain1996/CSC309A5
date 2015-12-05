@@ -21,12 +21,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 			templateUrl: 'partials/signup.html',
 			controller: 'SignupCtl'
 		})
-		/*
+	
 		.when('/allCaterers', {
 			templateUrl: 'partials/allCaterers.html',
 			controller: 'allCaters'	
 		})
-		*/
+	
 		.when('/profile', {
 			templateUrl: 'partials/profile.html',
 			controller: 'ProfileCtl'
@@ -45,12 +45,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		.when('/editUser', {
 			templateUrl: 'partials/editUser.html',
 			controller: 'EditCtl'
-		});
+		})
 
 		.when('/userdash', {
 			templateUrl: 'partials/user_dashboard.html', 
 			controller: 'user-dash'
-		});
+		})
 
 	$locationProvider.html5Mode(true);
 
