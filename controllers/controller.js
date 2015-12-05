@@ -35,7 +35,8 @@ module.exports = {
 	},
 
 	makeCaterer : function(req, res){
-		Account.findOne( {username : req.body.username}, function(err, account) {
+		var user = JSON.parse(req.body.user);		
+		Account.findOne( {username : user.uername}, function(err, account) {
 			if(err){
 				console.log('make cater fucked up');
 			} else if(!account){
@@ -44,7 +45,7 @@ module.exports = {
 			} else {
 				account.type = 2;
 				account.save;
-				res.send({sucess: 'true'}, user: JSON.stringify(account));
+				res.send({sucess: 'true', user: JSON.stringify(account)});
 			}
 		});
 	},

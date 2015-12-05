@@ -14,6 +14,8 @@ module.exports = function(app) {
 
 
 	app.post('/login', controller.login);
+
+	app.post('/makeCaterer', controller.makeCaterer);
 /*
 	app.get('/userlist', controller.allUsers);
 
