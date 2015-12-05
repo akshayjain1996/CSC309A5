@@ -34,6 +34,21 @@ module.exports = {
 
 	},
 
+	makeCaterer : function(req, res){
+		Account.findOne( {username : req.body.username}, function(err, account) {
+			if(err){
+				console.log('make cater fucked up');
+			} else if(!account){
+				console.log('no suck user exists');
+				res.send({sucess: 'false', message: 'No such user exists'});
+			} else {
+				account.type = 2;
+				account.save;
+				res.send({sucess: 'true'}, user: JSON.stringify(account));
+			}
+		});
+	},
+
 	allUsers : function(req, res){
 		console.log("In allusers")
 		var session;
