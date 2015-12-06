@@ -47,6 +47,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 			controller: 'userEdit'
 		})
 
+		.when('/editCaterer', {
+			templateUrl: 'partials/updateCaterer.html',
+			controller: 'catererEdit'
+		})
+
 		.when('/catererDash', {
 			templateUrl: 'partials/catererDashboard.html', 
 			controller: 'catererDashboard'
@@ -449,6 +454,119 @@ app.controller('userEdit', function($scope, $http,  $location, $window, userFact
 app.controller('catererDashboard', function($scope, $http,  $location, $window, userFactory){
 
 });
+
+
+
+
+app.controller('catererEdit', function($scope, $http,  $location, $window, userFactory){
+	var usr = userFactory.getUser(); 
+	
+	$scope.UpdateBasic = function(){
+		if($scope.dispname!=""){
+			$http.post('/editdisplay', {userupdate: $scope.dispname, userid: usr._id}).success(function (response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user));
+					//$window.alert("Display name Updated!"); 
+				} else {					
+					$window.alert(response.message);
+				}
+			});
+		}
+		if($scope.userDesc!=""){
+			$http.post('/updateDesc', {userupdate: $scope.userDesc, userid: usr._id}).success(function (response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user));
+					//$window.alert("Display name Updated!"); 
+				} else {					
+					$window.alert(response.message);
+				}
+			});
+		}
+		if($scope.priceRange!="" && typeof $scope.priceRange === 'number'){
+			$http.post('/updatePriceRange', {userupdate: $scope.peiceRange, userid: usr._id}).success(function (response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user));
+					//$window.alert("Display name Updated!"); 
+				} else {					
+					$window.alert(response.message);
+				}
+			});
+		}
+		if($scope.userDesc=="" && $scope.dispname=="" && $scope.priceRange==""){
+			$window.alert("All fields are empty. Nothing to update.");
+		}
+		
+	}; 
+
+	$scope.updateAddress = function(){
+		if($scope.address!=""){
+			$http.post('/updateAddrs', {userdish: $scope.cuisine, userid: usr._id}).success(function(response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user)); 
+					$window.alert(response.message); 
+				}else{
+					$window.alert(response.message); 
+				}
+			});
+		}else{
+			$window.alert("Empty address field. Please enter an address and try again"); 
+		}
+	};
+
+
+	$scope.addCuisine = function(){
+		if($scope.cuisine!=""){
+			$http.post('/editdishes', {userdish: $scope.cuisine, userid: usr._id}).success(function(response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user)); 
+					$window.alert(response.message); 
+				}else{
+					$window.alert(response.message); 
+				}
+			});
+		}else{
+			$window.alert("No cuisine entered"); 
+		}
+	};
+
+
+
+	$scope.updatePass = function(){
+
+		var checkWhitespace = function(s) {
+  			return s.indexOf(' ') >= 0;
+		}; 
+
+		var oldpass = $scope.oldpassword; 
+		var newpass = $scope.newpassword; 
+		var conpass = $scope.conpassword; 
+
+		if($scope.oldpassword == undefined){
+			$window.alert("Please enter your current password"); 
+		}else if($scope.newpassword == undefined){
+			$window.alert("Please enter your new password"); 
+		}else if($scope.conpassword == undefined){
+			$window.alert("Please confirm your new password"); 
+		}else if(checkWhitespace($scope.oldpassword) || checkWhitespace($scope.newpassword) || checkWhitespace($scope.conpassword)){
+			$window.alert("Invalid password field(s). Please try again."); 
+		}else if($scope.newpassword != $scope.conpassword){
+			$window.alert("Passwords mismatch."); 
+		}else{
+			$http.post('/editpassword', {userpass: $scope.newpassword, userid: usr._id}).success(function(response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user)); 
+					$window.alert(response.message); 
+				}else{
+					$window.alert(response.message); 
+				}
+			});
+		}
+	};
+});
+
+
+
+
 
 //Factory : stores the user currently logged in
 app.factory('userFactory', function(){
