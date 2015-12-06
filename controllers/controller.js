@@ -193,7 +193,7 @@ module.exports = {
 		order.fulfillment_time = req.body.fulfillment_time;
 		order.delivery_details = req.body.delivery_details;
 		order.catererid = req.body.catererid;// -1 = not assigned to specific caterer
-		order.status = 0;//0=not accepted yet, 1=acccepted, 2=done
+		order.status = 1;//0=not accepted yet, 1=acccepted, 2=done
 		order.save();
 		res.session = session;
 		res.send({sucess: 'true', user: JSON.stringify(order)});
