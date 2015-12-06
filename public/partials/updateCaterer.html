@@ -13,17 +13,17 @@
 		<img id="updateLogo" src="../images/Logo.png" style="width:400px;height:100px;">	
 	   <br>
 		<form>
-    		<h3 class="updatecaterer-heading">Update Profile: DispName</h3><br>
+    		<h3 ng-model="nameHead" class="updatecaterer-heading">Update Profile:</h3><br>
     		<h4 class="updatecaterer-heading">Personal information</h4>
-    		<input ng-model="username" class="form-control" placeholder="Display Name" autofocus=""><br>
+    		<input ng-model="dispname" class="form-control" placeholder="Display Name" autofocus=""><br>
     		<div class="form-group">
         	<label for="comment">Description:</label>
        		 <textarea ng-model="userDesc" class="form-control" rows="5" id="commentAd" maxlength="499"></textarea>
       			</div>
       		<label for="comment">Price Range:</label>
       
-       		<input ng-model="pricefrom" class="form-control" placeholder="From" autofocus=""><br><input ng-model="priceto" class="form-control" placeholder="To" autofocus=""><br>
-            <button class="btn" ng-click="UpdateBasic()">Update Address</button><br>
+       		<input ng-model="priceRange" class="form-control" placeholder="From" autofocus=""><br>
+            <button class="btn" ng-click="UpdateBasic()">Update</button><br>
       	</form>
     </div> 
 </div>
@@ -34,16 +34,16 @@
     			<input ng-model="address" class="form-control" placeholder="Update Address" autofocus="">
     			<br>
     			<button class="btn" ng-click="updateAddress()">Update Address</button><br>
-    			<h4 class="updatecaterer-cusinehead">Can cook a new type of cuisine? Add it now!</h4>
+    			<h4 class="updatecaterer-cusinehead">Can cook a new type of Cuisine? Add it now!</h4>
     			<input ng-model="cuisine" class="form-control" placeholder="Add Cuisine" autofocus=""><br>
-    			<button class="btn" ng-click="addCuisine()">Add Cuisine Type</button>
+    			<button class="btn" ng-click="addCuisine()">Add Cuisine</button>
     			<br>
     			<h4 class="updatecaterer-changePass">Update password</h4><br>
     			<input type="password" ng-model="oldpassword" class="form-control" placeholder="Old Password">
     			<br>
     			<input type="password" ng-model="newpassword" class="form-control" placeholder="New Password">
     			<br>
-    			<input type="password" ng-model="confirmpassword" class="form-control" placeholder="Confirm Password">
+    			<input type="password" ng-model="conpassword" class="form-control" placeholder="Confirm Password">
     			<br>
 			    <button class="btn" ng-click="updatePass()">Change Password</button>
 
