@@ -193,6 +193,7 @@ module.exports = {
 		order.contact_info = req.body.user;
 		order.delivery_details = req.body.delivery_det;
 		order.catererid = req.body.caterer;
+		order.client_name = req.body.client_name;
 		order.status = 1;
 		order.placed_time = date.getHours() + ":" + date.getMinutes();
 
@@ -202,12 +203,11 @@ module.exports = {
 	},
 	
 	updateOrderStatus: function(req, res){
-		Order.findOne( {id : req.body.orderid}, function(err, order) {
+		Order.findOne( {_id : req.body.orderid}, function(err, order) {
 				if(!order) {
 					console.log("No such order exists!");
 				}
-				order.status = req.body.orderstatus;
-				order.catererid = req.body.catererid;
+				order.status = req.body.status;
 				order.save();
 				console.log("Update Sucessful");
 			} );
@@ -226,7 +226,7 @@ module.exports = {
 				console.log("Sending resp");
 				console.log(docs);
 				res.session = session;
-				res.send({orderList: docs});
+				res.send({orderList: JSON.stringify(docs)});
     		}
     	});
 	},

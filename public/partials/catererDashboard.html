@@ -8,15 +8,17 @@
                 <th>Client name</th>
                 <th>placed_time</th>
                 <th>details</th> 
-                <th>Action</th>
+                <th>Accept</th>
+                <th>Decline</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="order in newOrder">
-                <td>{{order.client_id}}</td>
+                <td>{{order.client_name}}</td>
                 <td>{{order.placed_time}}</td>
                 <td>{{order.details}}</td>
-                <td><button class="btn btn-primary btn-sm" ng-click="view(order._id)">Accept</button></td>
+                <td><button class="btn btn-primary btn-sm" ng-click="acceptOrder(order._id)">Accept</button></td>
+                <td><button class="btn btn-primary btn-sm" ng-click="declineOrder(order._id)">Decline</button></td>
             </tr>
         </tbody>
     </table>
@@ -35,10 +37,10 @@
         </thead>
         <tbody>
             <tr ng-repeat="order in pending">
-                <td>{{order.client_id}}</td>
+                <td>{{order.client_name}}</td>
                 <td>{{order.placed_time}}</td>
                 <td>{{order.details}}</td>
-                <td><button class="btn btn-primary btn-sm" ng-click="view(order._id)">Completed</button></td>
+                <td><button class="btn btn-primary btn-sm" ng-click="completeOrder(order._id)">Completed</button></td>
             </tr>
         </tbody>
     </table>
@@ -57,7 +59,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="order in completed">
-                <td>{{order.client_id}}</td>
+                <td>{{order.client_name}}</td>
                 <td>{{order.placed_time}}</td>
                 <td>{{order.details}}</td>
                 <td>{{order.fulfillment_time}}</td>

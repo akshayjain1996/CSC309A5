@@ -499,12 +499,12 @@ app.controller('catererDisplay', function($scope, $http,  $location, $window, us
 app.controller('orderController', function($scope, $http,  $location, $window, userFactory){
 	$scope.submit = function(){
 		var cater = userFactory.getCaterer();
-		var usr = userFactory.getUser;
+		var usr = userFactory.getUser();
 
 		var order_details = $scope.details;
 		var delivery_details = $scope.delivery_details;
 
-		$http.post('/placeOrder', {user : usr._id, caterer : cater._id, order_det : order_details, delivery_det: delivery_details}).success(function(response){
+		$http.post('/placeOrder', {user : usr._id, caterer : cater._id, order_det : order_details, delivery_det: delivery_details, client_name: usr.displayname}).success(function(response){
 			$window.alert("Order Placed");
 			$location.path('/catererDisplay');
 		});
@@ -518,6 +518,34 @@ app.controller('catererDashboard', function($scope, $http,  $location, $window, 
 			console.log(response.orderList);
 			$scope.newOrder = JSON.parse(response.orderList); 
 		}); 
+
+		$http.post('/getOrders', {status: 2, catererid: userFactory.getUser()._id}).success(function(response){
+			console.log(response.orderList);
+			$scope.pending = JSON.parse(response.orderList); 
+		});
+
+		$http.post('/getOrders', {status: 3, catererid: userFactory.getUser()._id}).success(function(response){
+			console.log(response.orderList);
+			$scope.completed = JSON.parse(response.orderList); 
+		});
+	}
+
+	$scope.declineOrder = function(oid){
+		$http.post('/updateOrderStatus', {orderid: oid, status: 0}).success(function(response) {
+			refresh();
+		});
+	}
+
+	$scope.acceptOrder = function(oid){
+		$http.post('/updateOrderStatus', {orderid: oid, status: 2}).success(function(response) {
+			refresh();
+		});
+	}
+
+	$scope.completeOrder = function(oid){
+		$http.post('/updateOrderStatus', {orderid: oid, status: 3}).success(function(response) {
+			refresh();
+		});	
 	}
 
 	refresh();

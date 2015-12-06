@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/db13');
+mongoose.connect('mongodb://localhost/db14');
 
 /*
 Type:

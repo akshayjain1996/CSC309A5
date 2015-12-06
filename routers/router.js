@@ -32,6 +32,8 @@ module.exports = function(app) {
 	app.post('/editCus', controller.editCus); 
 
 	app.post('/placeOrder', controller.addOrder);
+
+	app.post('/updateOrderStatus', controller.updateOrderStatus);
 /*
 	app.get('/userlist', controller.allUsers);
 
