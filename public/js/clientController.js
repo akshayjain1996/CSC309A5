@@ -50,7 +50,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		.when('/catererDash', {
 			templateUrl: 'partials/catererDashboard.html', 
 			controller: 'catererDashboard'
-		});
+		})
+
+		.when('/catererDisplay', {
+			templateUrl: 'partials/catererDisplay.html',
+			controller: 'catererDisplay'
+		})
 
 	$locationProvider.html5Mode(true);
 
@@ -355,11 +360,12 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 
 	refresh(); 
 
-	$scope.view = function(id_caterer){
-		$http.get("/caterer/" + id_caterer).success(function(response){
-		//TODO get the details of this particular caterer from the server
-		});
-	}
+	$scope.view = function(id_caterer, caterer){
+		console.log(id_caterer); 
+		console.log(caterer); 
+		userFactory.setCaterer(caterer); 
+		$location.path('/catererDisplay'); 
+	};
 
 	$scope.profile = function(){
 		console.log(usr); 
@@ -368,7 +374,7 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 		}else if(usr.type == 2){
 			$location.path('/catererDash'); 
 		}
-	}
+	};
 
 	$scope.dashboard = function(){
 		if(usr.type == 1){
@@ -446,6 +452,14 @@ app.controller('userEdit', function($scope, $http,  $location, $window, userFact
 	};
 });
 
+app.controller('catererDisplay', function($scope, $http,  $location, $window, userFactory){
+	var caterer = userFactory.getCaterer(); 
+
+	document.getElementById("display").innerHTML = caterer.displayname; 
+	document.getElementById("email").innerHTML = caterer.username; 
+	document.getElementById("type").innerHTML = caterer.type; 
+}); 
+
 app.controller('catererDashboard', function($scope, $http,  $location, $window, userFactory){
 
 });
@@ -454,6 +468,15 @@ app.controller('catererDashboard', function($scope, $http,  $location, $window, 
 app.factory('userFactory', function(){
 	var userFactory = {};
 	var user = null;
+	var caterer = null; 
+
+	userFactory.setCaterer = function(usr){
+		caterer = usr; 
+	};
+
+	userFactory.getCaterer = function(usr){
+		return caterer; 
+	};
 
 	userFactory.setUser = function(usr) {
 		user = usr;
@@ -461,9 +484,24 @@ app.factory('userFactory', function(){
 
 	userFactory.getUser = function(usr) {
 		return user;
-	}
+	};
 
 	return userFactory;
+});
+
+app.factory('viewCatererFactory', function(){
+	var catererFactory = {}; 
+	var caterer = null; 
+
+	catererFactory.setCaterer = function(c){
+		caterer = c; 
+	};
+
+	catererFactory.getCaterer = function(c){
+		return c; 
+	}
+
+	return catererFactory; 
 });
 
 
