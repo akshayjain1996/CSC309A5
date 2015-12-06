@@ -18,11 +18,12 @@
     		<input ng-model="username" class="form-control" placeholder="Display Name" autofocus=""><br>
     		<div class="form-group">
         	<label for="comment">Description:</label>
-       		 <textarea class="form-control" rows="5" id="commentAd" maxlength="499"></textarea>
+       		 <textarea ng-model="userDesc" class="form-control" rows="5" id="commentAd" maxlength="499"></textarea>
       			</div>
       		<label for="comment">Price Range:</label>
       
-       		<input ng-model="username" class="form-control" placeholder="From" autofocus=""><br><input ng-model="username" class="form-control" placeholder="To" autofocus=""><br>
+       		<input ng-model="pricefrom" class="form-control" placeholder="From" autofocus=""><br><input ng-model="priceto" class="form-control" placeholder="To" autofocus=""><br>
+            <button class="btn" ng-click="UpdateBasic()">Update Address</button><br>
       	</form>
     </div> 
 </div>
@@ -30,21 +31,21 @@
 	<div class="col-md-6">
     			<h4 class="updatecaterer-heading">Moved Locations? Keep you account updated.</h4>
             <form> 
-    			<input ng-model="username" class="form-control" placeholder="Update Address" autofocus="">
+    			<input ng-model="address" class="form-control" placeholder="Update Address" autofocus="">
     			<br>
-    			<button class="btn" ng-click="#">Update Address</button><br>
+    			<button class="btn" ng-click="updateAddress()">Update Address</button><br>
     			<h4 class="updatecaterer-cusinehead">Can cook a new type of cuisine? Add it now!</h4>
     			<input ng-model="cuisine" class="form-control" placeholder="Add Cuisine" autofocus=""><br>
-    			<button class="btn" ng-click="#">Add Cuisine Type</button>
+    			<button class="btn" ng-click="addCuisine()">Add Cuisine Type</button>
     			<br>
     			<h4 class="updatecaterer-changePass">Update password</h4><br>
-    			<input type="password" ng-model="password" class="form-control" placeholder="Old Password">
+    			<input type="password" ng-model="oldpassword" class="form-control" placeholder="Old Password">
     			<br>
-    			<input type="password" ng-model="password" class="form-control" placeholder="New Password">
+    			<input type="password" ng-model="newpassword" class="form-control" placeholder="New Password">
     			<br>
-    			<input type="password" ng-model="password" class="form-control" placeholder="Confirm Password">
+    			<input type="password" ng-model="confirmpassword" class="form-control" placeholder="Confirm Password">
     			<br>
-			    <button class="btn" ng-click="signup()">Change Password</button>
+			    <button class="btn" ng-click="updatePass()">Change Password</button>
 
 			  	</div>
 			  </form>
