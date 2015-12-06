@@ -587,11 +587,11 @@ app.controller('catererEdit', function($scope, $http,  $location, $window, userF
 	}; 
 
 	$scope.updatePrice = function(){
-		if($scope.from !="" && typeof $scope.from === 'number' && $scope.to != "" && typeof $scope.to === 'number'){
+		if(($scope.from !="") && ($scope.to != "")){
 			$http.post('/updatePriceRange', {userlow: $scope.from, userhigh: $scope.to,  userid: usr._id}).success(function (response){
 				if(response.sucess == "true"){
 					console.log(JSON.parse(response.user));
-					$window.alert("Display name Updated!"); 
+					$window.alert("Price updated!"); 
 				} else {					
 					$window.alert(response.message);
 				}
