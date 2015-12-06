@@ -24,7 +24,8 @@ var accountSchema = new mongoose.Schema({
 	  rating: Number,
 	  speciality: [String],
 	  address: String,
-	  reviews: [Number]
+	  reviews: [Number],
+    review_count: Number
   },
   userProfile: {
   	follows: [String], 

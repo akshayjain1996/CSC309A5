@@ -1,5 +1,6 @@
 var Account = require('../models/Account');
 var Order = require('../models/Order');
+var Review = require('../models/Review');
 
 module.exports = {
 	
@@ -46,7 +47,7 @@ module.exports = {
 				res.send({sucess: 'false', message: 'No such user exists'});
 			} else {
 				account.type = 2;
-				account.catererProfile.priceRange = 0;
+				account.catererProfile.review_count = 0;
 				account.save();
 				console.log("Sucessful	")
 				res.send({sucess: 'true', user: JSON.stringify(account)});
@@ -395,6 +396,33 @@ module.exports = {
 			}
 		}); 
 	}, 
+
+	addresdReview: function(req, res){
+		var session;
+		session = req.session;
+
+		var review = new Review(); 
+		review.userId = req.body.user;
+		review.catererId = req.body.catereer;
+		review.review = req.body.review;
+		review.rating = req.body.rating;
+
+		Account.findOne({_id: req.body.cateerer}, function(err, account) {
+			if(err){
+				console.log("Add Review error");
+			}else if(!account){
+				console.log("Add review error");
+			} else {
+				account.catererProfile.review_count += 1;
+				account.save();
+			}
+		});
+
+		review.save();
+		res.session = session;
+		res.send({success: 'true', review: JSON.stringify(review)})
+
+	},	
 
 	editCus: function(req, res){
 		var contains = function(arr, obj) {
