@@ -19,7 +19,15 @@ module.exports = function(app) {
 
 	app.post('/editdishes', controller.editDishes); 
 
-	app.post('/editpassword', controller.editPass)
+	app.post('/editpassword', controller.editPass);
+
+	app.post('/updateDesc', controller.editDesc);
+
+	app.post('/updatePriceRange', controller.editPrice); 
+
+	app.post('/updateAddr', controller.editAddr); 
+
+	app.post('/editCus', controller.editCus); 
 /*
 	app.get('/userlist', controller.allUsers);
 
