@@ -333,11 +333,10 @@ module.exports = {
 				if(account.aboutMe == req.body.userdesc){
 					res.send({sucess: 'false', message: 'Please enter a new description.'});
 				}else{ 
-					account.aboutMe = req.body.userpass; 
+					account.aboutMe = req.body.userdesc; 
 					account.save(); 
-					console.log(account.aboutMe); 
 					res.session = session; 
-					res.send({sucess: 'true', message: "Password changed.", user: JSON.stringify(account)}); 
+					res.send({sucess: 'true', message: "Description changed", user: JSON.stringify(account)}); 
 				}
 			}
 		}); 
@@ -358,14 +357,14 @@ module.exports = {
 				console.log('No user Exists');
 				res.send({sucess: 'false', message: 'No such user'});
 			}else{
-				if(account.catererProfile.priceRangeLower == req.body.userlow && account.catererProfile.priceRangeUpper == req.body.userhigh){
+				if((account.catererProfile.priceRangeLower == req.body.userlow) && (account.catererProfile.priceRangeUpper == req.body.userhigh)){
 					res.send({sucess: 'false', message: 'Please enter a new values.'});
 				}else{
 					account.catererProfile.priceRangeLower = req.body.userlow;
 					account.catererProfile.priceRangeUpper = req.body.userhigh;  
 					account.save(); 
 					res.session = session; 
-					res.send({sucess: 'true', message: "Password changed.", user: JSON.stringify(account)}); 
+					res.send({sucess: 'true', message: "Range Updated", user: JSON.stringify(account)}); 
 				}
 			}
 		}); 
@@ -385,13 +384,13 @@ module.exports = {
 				console.log('No user Exists');
 				res.send({sucess: 'false', message: 'No such user'});
 			}else{
-				if(account.catererProfile.address == req.body.userdesc){
+				if(account.catererProfile.address == req.body.useraddr){
 					res.send({sucess: 'false', message: 'Please enter a new address.'});
 				}else{
 					account.catererProfile.address = req.body.useraddr; 
 					account.save(); 
 					res.session = session; 
-					res.send({sucess: 'true', message: "Password changed.", user: JSON.stringify(account)}); 
+					res.send({sucess: 'true', message: "Address changed.", user: JSON.stringify(account)}); 
 				}
 			}
 		}); 
