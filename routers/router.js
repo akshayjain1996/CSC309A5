@@ -15,6 +15,8 @@ module.exports = function(app) {
 
 	app.post('/makeCaterer', controller.makeCaterer);
 
+	app.post('/getOrders', controller.getOrders);
+
 	app.post('/editdisplay', controller.editDisplay); 
 
 	app.post('/editdishes', controller.editDishes); 
@@ -28,6 +30,10 @@ module.exports = function(app) {
 	app.post('/updateAddr', controller.editAddr); 
 
 	app.post('/editCus', controller.editCus); 
+
+	app.post('/placeOrder', controller.addOrder);
+
+	app.post('/updateOrderStatus', controller.updateOrderStatus);
 /*
 	app.get('/userlist', controller.allUsers);
 

@@ -62,6 +62,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 			controller: 'catererDisplay'
 		})
 
+		.when('/order', {
+			templateUrl: 'partials/order.html',
+			controller: 'orderController'
+		})
+
 	$locationProvider.html5Mode(true);
 
 }]);
@@ -388,13 +393,14 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 					$window.alert("you are now registered as a caterer");
 					userFactory.setUser(JSON.parse(response.user));
 					console.log(JSON.parse(response.user));
+					$location.path('/catererDash');
 
 				}else {
 					$window.alert("somethings not right");
 				}
 			});
 		} else {
-
+			$location.path('/catererDash');
 		}
 
 	};
@@ -483,10 +489,66 @@ app.controller('catererDisplay', function($scope, $http,  $location, $window, us
 	document.getElementById("spec").innerHTML = str; 
 	document.getElementById("desc").innerHTML = caterer.aboutMe; 
 
+	$scope.order = function(){
+		userFactory.setCaterer(caterer);
+		$location.path('/order');
+	}
 }); 
 
-app.controller('catererDashboard', function($scope, $http,  $location, $window, userFactory){
 
+app.controller('orderController', function($scope, $http,  $location, $window, userFactory){
+	$scope.submit = function(){
+		var cater = userFactory.getCaterer();
+		var usr = userFactory.getUser();
+
+		var order_details = $scope.details;
+		var delivery_details = $scope.delivery_details;
+
+		$http.post('/placeOrder', {user : usr._id, caterer : cater._id, order_det : order_details, delivery_det: delivery_details, client_name: usr.displayname}).success(function(response){
+			$window.alert("Order Placed");
+			$location.path('/catererDisplay');
+		});
+
+	}
+});
+
+app.controller('catererDashboard', function($scope, $http,  $location, $window, userFactory){
+	var refresh = function(){
+		$http.post('/getOrders', {status: 1, catererid: userFactory.getUser()._id}).success(function(response){
+			console.log(response.orderList);
+			$scope.newOrder = JSON.parse(response.orderList); 
+		}); 
+
+		$http.post('/getOrders', {status: 2, catererid: userFactory.getUser()._id}).success(function(response){
+			console.log(response.orderList);
+			$scope.pending = JSON.parse(response.orderList); 
+		});
+
+		$http.post('/getOrders', {status: 3, catererid: userFactory.getUser()._id}).success(function(response){
+			console.log(response.orderList);
+			$scope.completed = JSON.parse(response.orderList); 
+		});
+	}
+
+	$scope.declineOrder = function(oid){
+		$http.post('/updateOrderStatus', {orderid: oid, status: 0}).success(function(response) {
+			refresh();
+		});
+	}
+
+	$scope.acceptOrder = function(oid){
+		$http.post('/updateOrderStatus', {orderid: oid, status: 2}).success(function(response) {
+			refresh();
+		});
+	}
+
+	$scope.completeOrder = function(oid){
+		$http.post('/updateOrderStatus', {orderid: oid, status: 3}).success(function(response) {
+			refresh();
+		});	
+	}
+
+	refresh();
 });
 
 app.controller('catererEdit', function($scope, $http,  $location, $window, userFactory){
@@ -627,4 +689,3 @@ app.factory('userFactory', function(){
 
 	return userFactory;
 });
-
