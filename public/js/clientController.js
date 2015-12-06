@@ -489,19 +489,3 @@ app.factory('userFactory', function(){
 	return userFactory;
 });
 
-app.factory('viewCatererFactory', function(){
-	var catererFactory = {}; 
-	var caterer = null; 
-
-	catererFactory.setCaterer = function(c){
-		caterer = c; 
-	};
-
-	catererFactory.getCaterer = function(c){
-		return c; 
-	}
-
-	return catererFactory; 
-});
-
-
