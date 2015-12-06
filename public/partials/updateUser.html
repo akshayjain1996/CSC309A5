@@ -1,22 +1,22 @@
-<div id="user_dash" class="container" ng-controller="user-dash"> 
+<div class="container" ng-controller="userEdit"> 
 
  <div class="col-md-3">[Image update]</div>
 	<div class="col-md-6">
             <form> 
             	<h4> Update Display </h4>
-    			<input ng-model="displayname" class="form-control" placeholder="Update Display Name" autofocus="">
+    			<input id="disp" ng-model="displayname" class="form-control" placeholder="Update Display Name" autofocus="">
     			<br>
-    			<button class="btn" ng-click="update_displayname()">Update display</button><br>
+    			<button class="btn" ng-click="update()">Update display</button><br>
     			<h4 class="updatecaterer-cusinehead">Add your favourite dish</h4>
     			<input ng-model="cuisine" class="form-control" placeholder="Insert a favourite dish" autofocus="">
     			<br>
-    			<button class="btn" ng-click="#">Insert</button>
+    			<button class="btn" ng-click="insert()">Insert</button>
     			<br>
     			<br>
 
     			<h4 class="updatecaterer-changePass">Change password</h4>
     			<br>
-    			<input type="password" ng-model="oldpassword" class="form-control" placeholder="Old Password">
+    			<input type="password" ng-model="oldpassword" class="form-control" placeholder="Current Password">
     			<br>
     			<input type="password" ng-model="newpassword" class="form-control" placeholder="New Password">
     			<br>
