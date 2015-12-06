@@ -91,7 +91,7 @@ app.controller('LoginCtl', function($scope, $http, $location, $route, $window, u
 
 	$scope.login = function() {
 		console.log($scope.username);
-		$http.post('login', {username: $scope.username, password: $scope.password}).success(function (response){
+		$http.post('/login', {username: $scope.username, password: $scope.password}).success(function (response){
 			if(response.sucess == 'true'){
 				console.log(response.user);
 				userFactory.setUser(JSON.parse(response.user));
@@ -377,7 +377,7 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 		if(usr.type == 1){
 			$location.path('/editUser');
 		}else if(usr.type == 2){
-			$location.path('/catererDash'); 
+			$location.path('/editCaterer'); 
 		}
 	};
 
@@ -404,25 +404,33 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 app.controller('userEdit', function($scope, $http,  $location, $window, userFactory){
 	var usr = userFactory.getUser(); 
 	$scope.update = function(){
-		$http.post('/editdisplay', {userupdate: $scope.displayname, userid: usr._id}).success(function (response){
-			if(response.sucess == "true"){
-				console.log(JSON.parse(response.user));
-				$window.alert("Display name Updated!"); 
-			} else {					
-				$window.alert(response.message);
-			}
-		});
+		if($scope.displayname != ""){
+			$http.post('/editdisplay', {userupdate: $scope.displayname, userid: usr._id}).success(function (response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user));
+					$window.alert("Display name Updated!"); 
+				} else {					
+					$window.alert(response.message);
+				}
+			});
+		}else{
+			$window.alert("Please enter a displayname.");	
+		}
 	}; 
 
 	$scope.insert = function(){
-		$http.post('/editdishes', {userdish: $scope.cuisine, userid: usr._id}).success(function(response){
-			if(response.sucess == "true"){
-				console.log(JSON.parse(response.user)); 
-				$window.alert(response.message); 
-			}else{
-				$window.alert(response.message); 
-			}
-		});
+		if($scope.cuisine != ""){
+			$http.post('/editdishes', {userdish: $scope.cuisine, userid: usr._id}).success(function(response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user)); 
+					$window.alert(response.message); 
+				}else{
+					$window.alert(response.message); 
+				}
+			});
+		}else{
+			$window.alert("Please enter a cuisine.");	
+		}
 	};
 
 	$scope.changePassword = function(){
@@ -460,10 +468,22 @@ app.controller('userEdit', function($scope, $http,  $location, $window, userFact
 
 app.controller('catererDisplay', function($scope, $http,  $location, $window, userFactory){
 	var caterer = userFactory.getCaterer(); 
+	var i; 
+	var str = "";
+	var array_cus = caterer.catererProfile.speciality;
 
 	document.getElementById("display").innerHTML = caterer.displayname; 
-	document.getElementById("email").innerHTML = caterer.username; 
-	document.getElementById("type").innerHTML = caterer.type; 
+	document.getElementById("email").innerHTML = caterer.username;
+	for(i = 0; i < array_cus.length; i++){
+		if(i ==  array_cus.length - 1){
+			str += " " + array_cus[i];
+		}else{
+			str += " " + array_cus[i] + ",";
+		}
+	}  
+	document.getElementById("spec").innerHTML = str; 
+	document.getElementById("desc").innerHTML = caterer.aboutMe; 
+
 }); 
 
 app.controller('catererDashboard', function($scope, $http,  $location, $window, userFactory){
@@ -477,52 +497,59 @@ app.controller('catererDashboard', function($scope, $http,  $location, $window, 
 	refresh();
 });
 
-
-
-
 app.controller('catererEdit', function($scope, $http,  $location, $window, userFactory){
 	var usr = userFactory.getUser(); 
+
+	$scope.updateDisplay = function(){
+		console.log($scope.displayname);
+		if($scope.displayname != ""){
+			$http.post('/editdisplay', {userupdate: $scope.displayname, userid: usr._id}).success(function (response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user));
+					$window.alert("Display name Updated!"); 
+				} else {					
+					$window.alert(response.message);
+				}
+			});
+		}else{
+			$window.alert("Please enter a displayname"); 
+		}
+	}; 
 	
-	$scope.UpdateBasic = function(){
-		if($scope.dispname!=""){
-			$http.post('/editdisplay', {userupdate: $scope.dispname, userid: usr._id}).success(function (response){
-				if(response.sucess == "true"){
-					console.log(JSON.parse(response.user));
-					//$window.alert("Display name Updated!"); 
-				} else {					
-					$window.alert(response.message);
-				}
-			});
-		}
+	$scope.updateBasic = function(){
 		if($scope.userDesc!=""){
-			$http.post('/updateDesc', {userupdate: $scope.userDesc, userid: usr._id}).success(function (response){
+			console.log($scope.userDesc); 
+			$http.post('/updateDesc', {userdesc: $scope.userDesc, userid: usr._id}).success(function (response){
 				if(response.sucess == "true"){
 					console.log(JSON.parse(response.user));
-					//$window.alert("Display name Updated!"); 
+					$window.alert("Description name updated!"); 
 				} else {					
 					$window.alert(response.message);
 				}
 			});
+		}else{
+			$window.alert("Please enter the description"); 
 		}
-		if($scope.priceRange!="" && typeof $scope.priceRange === 'number'){
-			$http.post('/updatePriceRange', {userupdate: $scope.peiceRange, userid: usr._id}).success(function (response){
+	}; 
+
+	$scope.updatePrice = function(){
+		if($scope.from !="" && typeof $scope.from === 'number' && $scope.to != "" && typeof $scope.to === 'number'){
+			$http.post('/updatePriceRange', {userlow: $scope.from, userhigh: $scope.to,  userid: usr._id}).success(function (response){
 				if(response.sucess == "true"){
 					console.log(JSON.parse(response.user));
-					//$window.alert("Display name Updated!"); 
+					$window.alert("Display name Updated!"); 
 				} else {					
 					$window.alert(response.message);
 				}
 			});
+		}else{
+			$window.alert("Please enter appropriate information."); 
 		}
-		if($scope.userDesc=="" && $scope.dispname=="" && $scope.priceRange==""){
-			$window.alert("All fields are empty. Nothing to update.");
-		}
-		
 	}; 
 
 	$scope.updateAddress = function(){
 		if($scope.address!=""){
-			$http.post('/updateAddrs', {userdish: $scope.cuisine, userid: usr._id}).success(function(response){
+			$http.post('/updateAddr', {useraddr: $scope.address, userid: usr._id}).success(function(response){
 				if(response.sucess == "true"){
 					console.log(JSON.parse(response.user)); 
 					$window.alert(response.message); 
@@ -537,8 +564,8 @@ app.controller('catererEdit', function($scope, $http,  $location, $window, userF
 
 
 	$scope.addCuisine = function(){
-		if($scope.cuisine!=""){
-			$http.post('/editdishes', {userdish: $scope.cuisine, userid: usr._id}).success(function(response){
+		if($scope.cuisines!=""){
+			$http.post('/editCus', {usercus: $scope.cuisines, userid: usr._id}).success(function(response){
 				if(response.sucess == "true"){
 					console.log(JSON.parse(response.user)); 
 					$window.alert(response.message); 
@@ -550,8 +577,6 @@ app.controller('catererEdit', function($scope, $http,  $location, $window, userF
 			$window.alert("No cuisine entered"); 
 		}
 	};
-
-
 
 	$scope.updatePass = function(){
 
@@ -585,10 +610,6 @@ app.controller('catererEdit', function($scope, $http,  $location, $window, userF
 		}
 	};
 });
-
-
-
-
 
 //Factory : stores the user currently logged in
 app.factory('userFactory', function(){

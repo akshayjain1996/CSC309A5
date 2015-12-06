@@ -252,6 +252,14 @@ module.exports = {
 	},
 
 	editDishes: function(req, res){
+		var contains = function(arr, obj) {
+   			for(var i=0; i<arr.length; i++) {
+   		   		 if (arr[i] == obj){
+   		     		return true;
+   		 		}
+   		 	}
+   		 	return false; 
+		};
 		var session; 
 		session = req.session; 
 		console.log(req.body.userdish); 
@@ -265,10 +273,14 @@ module.exports = {
 				console.log('No user Exists');
 				res.send({sucess: 'false', message: 'No such user'});
 			}else{
-				account.userProfile.favs.push(req.body.userdish);  
-				account.save(); 
-				res.session = session;
-				res.send({sucess: 'true', message: "Added dish " + req.body.userdish, user: JSON.stringify(account)}); 
+				if(contains(account.userProfile.favs, req.body.userdish)){
+					res.send({sucess: 'false', message: 'You already like this cuisine.'});
+				}else{
+					account.userProfile.favs.push(req.body.userdish);  
+					account.save(); 
+					res.session = session;
+					res.send({sucess: 'true', message: "Added dish " + req.body.userdish, user: JSON.stringify(account)}); 
+				}
 			}
 		});
 	},
@@ -298,7 +310,121 @@ module.exports = {
 			}
 		});
 	},
+
+	editDesc: function(req, res){
+		var session; 
+		session = req.session; 
+		console.log(req.body.userdesc); 
+		console.log(req.body.userid); 
+		Account.findOne({_id: req.body.userid}, function(err, account){
+			if(err){
+				console.log(err);
+				res.send({sucess: 'false', message: 'No such user error'});
+			}
+			if(!account){
+				console.log('No user Exists');
+				res.send({sucess: 'false', message: 'No such user'});
+			}else{
+				if(account.aboutMe == req.body.userdesc){
+					res.send({sucess: 'false', message: 'Please enter a new description.'});
+				}else{ 
+					account.aboutMe = req.body.userpass; 
+					account.save(); 
+					console.log(account.aboutMe); 
+					res.session = session; 
+					res.send({sucess: 'true', message: "Password changed.", user: JSON.stringify(account)}); 
+				}
+			}
+		}); 
+	},
+
+	editPrice: function(req, res){
+		var session; 
+		session = req.session; 
+		console.log(req.body.userlow); 
+		console.log(req.body.userhigh); 
+		console.log(req.body.userid); 
+		Account.findOne({_id: req.body.userid}, function(err, account){
+			if(err){
+				console.log(err);
+				res.send({sucess: 'false', message: 'No such user error'});
+			}
+			if(!account){
+				console.log('No user Exists');
+				res.send({sucess: 'false', message: 'No such user'});
+			}else{
+				if(account.catererProfile.priceRangeLower == req.body.userlow && account.catererProfile.priceRangeUpper == req.body.userhigh){
+					res.send({sucess: 'false', message: 'Please enter a new values.'});
+				}else{
+					account.catererProfile.priceRangeLower = req.body.userlow;
+					account.catererProfile.priceRangeUpper = req.body.userhigh;  
+					account.save(); 
+					res.session = session; 
+					res.send({sucess: 'true', message: "Password changed.", user: JSON.stringify(account)}); 
+				}
+			}
+		}); 
+	},
 	
+	editAddr: function(req, res){
+		var session; 
+		session = req.session; 
+		console.log(req.body.useraddr); 
+		console.log(req.body.userid); 
+		Account.findOne({_id: req.body.userid}, function(err, account){
+			if(err){
+				console.log(err);
+				res.send({sucess: 'false', message: 'No such user error'});
+			}
+			if(!account){
+				console.log('No user Exists');
+				res.send({sucess: 'false', message: 'No such user'});
+			}else{
+				if(account.catererProfile.address == req.body.userdesc){
+					res.send({sucess: 'false', message: 'Please enter a new address.'});
+				}else{
+					account.catererProfile.address = req.body.useraddr; 
+					account.save(); 
+					res.session = session; 
+					res.send({sucess: 'true', message: "Password changed.", user: JSON.stringify(account)}); 
+				}
+			}
+		}); 
+	}, 
+
+	editCus: function(req, res){
+		var contains = function(arr, obj) {
+   			for(var i=0; i<arr.length; i++) {
+   		   		 if (arr[i] == obj){
+   		     		return true;
+   		 		}
+   		 	}
+   		 	return false; 
+		};
+		var session; 
+		session = req.session; 
+		console.log(req.body.usercus); 
+		console.log(req.body.userid); 
+		Account.findOne({_id: req.body.userid}, function(err, account){
+			if(err){
+				console.log(err);
+				res.send({sucess: 'false', message: 'No such user error'});
+			}
+			if(!account){
+				console.log('No user Exists');
+				res.send({sucess: 'false', message: 'No such user'});
+			}else{
+				if(contains(account.catererProfile.speciality, req.body.usercus)){
+					res.send({sucess: 'false', message: 'You already know how to make this cuisine.'});
+				}else{
+					account.catererProfile.speciality.push(req.body.usercus); 
+					account.save(); 
+					res.session = session; 
+					res.send({sucess: 'true', message: "Cuisine added.", user: JSON.stringify(account)}); 
+				}
+			}
+		}); 
+	},
 	//when an order is rejected add it to the pool of orders that have not been picked up by anybody
 	rejectOrder: function(req, res){
 		req.body.orderstatus = 0;
