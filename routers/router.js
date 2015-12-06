@@ -14,6 +14,12 @@ module.exports = function(app) {
 	app.post('/login', controller.login);
 
 	app.post('/makeCaterer', controller.makeCaterer);
+
+	app.post('/editdisplay', controller.editDisplay); 
+
+	app.post('/editdishes', controller.editDishes); 
+
+	app.post('/editpassword', controller.editPass)
 /*
 	app.get('/userlist', controller.allUsers);
 
