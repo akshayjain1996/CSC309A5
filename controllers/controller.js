@@ -225,6 +225,79 @@ module.exports = {
     		}
     	});
 	},
+
+	editDisplay: function(req, res){
+		var session;
+		session = req.session;
+		console.log(req.body.userupdate);
+		console.log(req.body.userid); 
+		Account.findOne( {_id : req.body.userid}, function(err, account) {
+			if(err){
+				console.log(err);
+				res.send({sucess: 'false', message: 'No such user error'});
+			}
+			if(!account) {
+				console.log('No user Exists');
+				res.send({sucess: 'false', message: 'No such user'});
+			} else if (account.displayname != req.body.userupdate){
+				account.displayname = req.body.userupdate;
+				account.save();
+				res.session = session;
+				console.log("Update successful"); 
+				res.send({sucess: 'true', user: JSON.stringify(account)});
+			}else{
+				res.send({sucess: 'false', message: "Your display is already this!"});
+			}
+		});
+	},
+
+	editDishes: function(req, res){
+		var session; 
+		session = req.session; 
+		console.log(req.body.userdish); 
+		console.log(req.body.userid); 
+		Account.findOne({_id: req.body.userid}, function(err, account){
+			if(err){
+				console.log(err);
+				res.send({sucess: 'false', message: 'No such user error'});
+			}
+			if(!account){
+				console.log('No user Exists');
+				res.send({sucess: 'false', message: 'No such user'});
+			}else{
+				account.userProfile.favs.push(req.body.userdish);  
+				account.save(); 
+				res.session = session;
+				res.send({sucess: 'true', message: "Added dish " + req.body.userdish, user: JSON.stringify(account)}); 
+			}
+		});
+	},
+
+	editPass: function(req, res){
+		var session; 
+		session = req.session; 
+		console.log(req.body.userpass); 
+		console.log(req.body.userid); 
+		Account.findOne({_id: req.body.userid}, function(err, account){
+			if(err){
+				console.log(err);
+				res.send({sucess: 'false', message: 'No such user error'});
+			}
+			if(!account){
+				console.log('No user Exists');
+				res.send({sucess: 'false', message: 'No such user'});
+			}else{
+				if(account.password == req.body.userpass){
+					res.send({sucess: 'false', message: 'Please enter a new password.'});
+				}else{
+					account.password = req.body.userpass; 
+					account.save(); 
+					res.session = session; 
+					res.send({sucess: 'true', message: "Password changed.", user: JSON.stringify(account)}); 
+				}
+			}
+		});
+	},
 	
 	//when an order is rejected add it to the pool of orders that have not been picked up by anybody
 	rejectOrder: function(req, res){

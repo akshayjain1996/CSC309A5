@@ -43,19 +43,24 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		})
 
 		.when('/editUser', {
-			templateUrl: 'partials/editUser.html',
-			controller: 'EditCtl'
+			templateUrl: 'partials/updateUser.html',
+			controller: 'userEdit'
 		})
 
-		.when('/userdash', {
-			templateUrl: 'partials/updateCaterer.html', 
-			controller: 'user-dash'
+		.when('/editCaterer', {
+			templateUrl: 'partials/updateCaterer.html',
+			controller: 'catererEdit'
 		})
 
 		.when('/catererDash', {
 			templateUrl: 'partials/catererDashboard.html', 
 			controller: 'catererDashboard'
-		});
+		})
+
+		.when('/catererDisplay', {
+			templateUrl: 'partials/catererDisplay.html',
+			controller: 'catererDisplay'
+		})
 
 	$locationProvider.html5Mode(true);
 
@@ -360,15 +365,21 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 
 	refresh(); 
 
-	$scope.view = function(id_caterer){
-		$http.get("/caterer/" + id_caterer).success(function(response){
-		//TODO get the details of this particular caterer from the server
-		});
-	}
+	$scope.view = function(id_caterer, caterer){
+		console.log(id_caterer); 
+		console.log(caterer); 
+		userFactory.setCaterer(caterer); 
+		$location.path('/catererDisplay'); 
+	};
 
 	$scope.profile = function(){
-
-	}
+		console.log(usr); 
+		if(usr.type == 1){
+			$location.path('/editUser');
+		}else if(usr.type == 2){
+			$location.path('/catererDash'); 
+		}
+	};
 
 	$scope.dashboard = function(){
 		if(usr.type == 1){
@@ -387,14 +398,73 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 			$location.path('/catererDash');
 		}
 
-	}
+	};
 });
 
-app.controller('user-dash', function($scope, $http,  $location, $window, userFactory){
+app.controller('userEdit', function($scope, $http,  $location, $window, userFactory){
+	var usr = userFactory.getUser(); 
+	$scope.update = function(){
+		$http.post('/editdisplay', {userupdate: $scope.displayname, userid: usr._id}).success(function (response){
+			if(response.sucess == "true"){
+				console.log(JSON.parse(response.user));
+				$window.alert("Display name Updated!"); 
+			} else {					
+				$window.alert(response.message);
+			}
+		});
+	}; 
 
-	//TODO
+	$scope.insert = function(){
+		$http.post('/editdishes', {userdish: $scope.cuisine, userid: usr._id}).success(function(response){
+			if(response.sucess == "true"){
+				console.log(JSON.parse(response.user)); 
+				$window.alert(response.message); 
+			}else{
+				$window.alert(response.message); 
+			}
+		});
+	};
 
+	$scope.changePassword = function(){
+
+		var checkWhitespace = function(s) {
+  			return s.indexOf(' ') >= 0;
+		}; 
+
+		var oldpass = $scope.oldpassword; 
+		var newpass = $scope.newpassword; 
+		var conpass = $scope.conpassword; 
+
+		if($scope.oldpassword == undefined){
+			$window.alert("Please enter your current password"); 
+		}else if($scope.newpassword == undefined){
+			$window.alert("Please enter your new password"); 
+		}else if($scope.conpassword == undefined){
+			$window.alert("Please confirm your new password"); 
+		}else if(checkWhitespace($scope.oldpassword) || checkWhitespace($scope.newpassword) || checkWhitespace($scope.conpassword)){
+			$window.alert("Invalid password field(s). Please try again."); 
+		}else if($scope.newpassword != $scope.conpassword){
+			$window.alert("Passwords mismatch."); 
+		}else{
+			$http.post('/editpassword', {userpass: $scope.newpassword, userid: usr._id}).success(function(response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user)); 
+					$window.alert(response.message); 
+				}else{
+					$window.alert(response.message); 
+				}
+			});
+		}
+	};
 });
+
+app.controller('catererDisplay', function($scope, $http,  $location, $window, userFactory){
+	var caterer = userFactory.getCaterer(); 
+
+	document.getElementById("display").innerHTML = caterer.displayname; 
+	document.getElementById("email").innerHTML = caterer.username; 
+	document.getElementById("type").innerHTML = caterer.type; 
+}); 
 
 app.controller('catererDashboard', function($scope, $http,  $location, $window, userFactory){
 	var refresh = function(){
@@ -407,10 +477,132 @@ app.controller('catererDashboard', function($scope, $http,  $location, $window, 
 	refresh();
 });
 
+
+
+
+app.controller('catererEdit', function($scope, $http,  $location, $window, userFactory){
+	var usr = userFactory.getUser(); 
+	
+	$scope.UpdateBasic = function(){
+		if($scope.dispname!=""){
+			$http.post('/editdisplay', {userupdate: $scope.dispname, userid: usr._id}).success(function (response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user));
+					//$window.alert("Display name Updated!"); 
+				} else {					
+					$window.alert(response.message);
+				}
+			});
+		}
+		if($scope.userDesc!=""){
+			$http.post('/updateDesc', {userupdate: $scope.userDesc, userid: usr._id}).success(function (response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user));
+					//$window.alert("Display name Updated!"); 
+				} else {					
+					$window.alert(response.message);
+				}
+			});
+		}
+		if($scope.priceRange!="" && typeof $scope.priceRange === 'number'){
+			$http.post('/updatePriceRange', {userupdate: $scope.peiceRange, userid: usr._id}).success(function (response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user));
+					//$window.alert("Display name Updated!"); 
+				} else {					
+					$window.alert(response.message);
+				}
+			});
+		}
+		if($scope.userDesc=="" && $scope.dispname=="" && $scope.priceRange==""){
+			$window.alert("All fields are empty. Nothing to update.");
+		}
+		
+	}; 
+
+	$scope.updateAddress = function(){
+		if($scope.address!=""){
+			$http.post('/updateAddrs', {userdish: $scope.cuisine, userid: usr._id}).success(function(response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user)); 
+					$window.alert(response.message); 
+				}else{
+					$window.alert(response.message); 
+				}
+			});
+		}else{
+			$window.alert("Empty address field. Please enter an address and try again"); 
+		}
+	};
+
+
+	$scope.addCuisine = function(){
+		if($scope.cuisine!=""){
+			$http.post('/editdishes', {userdish: $scope.cuisine, userid: usr._id}).success(function(response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user)); 
+					$window.alert(response.message); 
+				}else{
+					$window.alert(response.message); 
+				}
+			});
+		}else{
+			$window.alert("No cuisine entered"); 
+		}
+	};
+
+
+
+	$scope.updatePass = function(){
+
+		var checkWhitespace = function(s) {
+  			return s.indexOf(' ') >= 0;
+		}; 
+
+		var oldpass = $scope.oldpassword; 
+		var newpass = $scope.newpassword; 
+		var conpass = $scope.conpassword; 
+
+		if($scope.oldpassword == undefined){
+			$window.alert("Please enter your current password"); 
+		}else if($scope.newpassword == undefined){
+			$window.alert("Please enter your new password"); 
+		}else if($scope.conpassword == undefined){
+			$window.alert("Please confirm your new password"); 
+		}else if(checkWhitespace($scope.oldpassword) || checkWhitespace($scope.newpassword) || checkWhitespace($scope.conpassword)){
+			$window.alert("Invalid password field(s). Please try again."); 
+		}else if($scope.newpassword != $scope.conpassword){
+			$window.alert("Passwords mismatch."); 
+		}else{
+			$http.post('/editpassword', {userpass: $scope.newpassword, userid: usr._id}).success(function(response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user)); 
+					$window.alert(response.message); 
+				}else{
+					$window.alert(response.message); 
+				}
+			});
+		}
+	};
+});
+
+
+
+
+
 //Factory : stores the user currently logged in
 app.factory('userFactory', function(){
 	var userFactory = {};
 	var user = null;
+	var caterer = null; 
+
+	userFactory.setCaterer = function(usr){
+		caterer = usr; 
+	};
+
+	userFactory.getCaterer = function(usr){
+		return caterer; 
+	};
 
 	userFactory.setUser = function(usr) {
 		user = usr;
@@ -418,9 +610,8 @@ app.factory('userFactory', function(){
 
 	userFactory.getUser = function(usr) {
 		return user;
-	}
+	};
 
 	return userFactory;
 });
-
 
