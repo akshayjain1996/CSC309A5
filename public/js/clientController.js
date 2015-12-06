@@ -43,13 +43,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		})
 
 		.when('/editUser', {
-			templateUrl: 'partials/editUser.html',
-			controller: 'EditCtl'
-		})
-
-		.when('/userdash', {
-			templateUrl: 'partials/updateCaterer.html', 
-			controller: 'user-dash'
+			templateUrl: 'partials/updateUser.html',
+			controller: 'userEdit'
 		})
 
 		.when('/catererDash', {
@@ -367,7 +362,12 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 	}
 
 	$scope.profile = function(){
-
+		console.log(usr); 
+		if(usr.type == 1){
+			$location.path('/editUser');
+		}else if(usr.type == 2){
+			$location.path('/catererDash'); 
+		}
 	}
 
 	$scope.dashboard = function(){
@@ -386,20 +386,67 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 
 		}
 
-	}
+	};
 });
 
-app.controller('user-dash', function($scope, $http,  $location, $window, userFactory){
+app.controller('userEdit', function($scope, $http,  $location, $window, userFactory){
+	var usr = userFactory.getUser(); 
+	$scope.update = function(){
+		$http.post('/editdisplay', {userupdate: $scope.displayname, userid: usr._id}).success(function (response){
+			if(response.sucess == "true"){
+				console.log(JSON.parse(response.user));
+				$window.alert("Display name Updated!"); 
+			} else {					
+				$window.alert(response.message);
+			}
+		});
+	}; 
 
-	//TODO
+	$scope.insert = function(){
+		$http.post('/editdishes', {userdish: $scope.cuisine, userid: usr._id}).success(function(response){
+			if(response.sucess == "true"){
+				console.log(JSON.parse(response.user)); 
+				$window.alert(response.message); 
+			}else{
+				$window.alert(response.message); 
+			}
+		});
+	};
 
+	$scope.changePassword = function(){
+
+		var checkWhitespace = function(s) {
+  			return s.indexOf(' ') >= 0;
+		}; 
+
+		var oldpass = $scope.oldpassword; 
+		var newpass = $scope.newpassword; 
+		var conpass = $scope.conpassword; 
+
+		if($scope.oldpassword == undefined){
+			$window.alert("Please enter your current password"); 
+		}else if($scope.newpassword == undefined){
+			$window.alert("Please enter your new password"); 
+		}else if($scope.conpassword == undefined){
+			$window.alert("Please confirm your new password"); 
+		}else if(checkWhitespace($scope.oldpassword) || checkWhitespace($scope.newpassword) || checkWhitespace($scope.conpassword)){
+			$window.alert("Invalid password field(s). Please try again."); 
+		}else if($scope.newpassword != $scope.conpassword){
+			$window.alert("Passwords mismatch."); 
+		}else{
+			$http.post('/editpassword', {userpass: $scope.newpassword, userid: usr._id}).success(function(response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user)); 
+					$window.alert(response.message); 
+				}else{
+					$window.alert(response.message); 
+				}
+			});
+		}
+	};
 });
 
 app.controller('catererDashboard', function($scope, $http,  $location, $window, userFactory){
-
-	
-
-	refresh(); 
 
 });
 
