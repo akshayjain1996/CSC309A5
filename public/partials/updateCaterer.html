@@ -1,63 +1,54 @@
 <head>
 <title>Update Profile</title>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
 </head>
 
-<div class="row">
-	<div class="col-md-3">
-	</div>
-	
-
+<div class="container" ng-controller="catererEdit">
 	<div class="col-md-6">
-		<img id="updateLogo" src="../images/Logo.png" style="width:400px;height:100px;">	
-	   <br>
+	    <br>
 		<form>
-    		<h3 ng-model="nameHead" class="updatecaterer-heading">Update Profile:</h3><br>
-    		<h4 class="updatecaterer-heading">Personal information</h4>
-    		<input ng-model="dispname" class="form-control" placeholder="Display Name" autofocus=""><br>
-    		<div class="form-group">
+    		<label for="comment">Display Name:</h4>
+    		<input ng-model="displayname" class="form-control" placeholder="Display Name" autofocus=""><br>
+            <button class="btn" ng-click="updateDisplay()">Update Display Name</button>
+            <br>
+            <br>
         	<label for="comment">Description:</label>
-       		 <textarea ng-model="userDesc" class="form-control" rows="5" id="commentAd" maxlength="499"></textarea>
-      			</div>
+       		<textarea ng-model="userDesc" class="form-control" rows="5" id="commentAd" maxlength="499"></textarea>
+            <br>
+            <button class="btn" ng-click="updateBasic()">Update Description</button>   
+            <br>
+            <br>
       		<label for="comment">Price Range:</label>
-      
-       		<input ng-model="priceRange" class="form-control" placeholder="From" autofocus=""><br>
-            <button class="btn" ng-click="UpdateBasic()">Update</button><br>
+            <div class="row">
+                <div class="col-md-3">
+       		      <input ng-model="from" class="form-control" placeholder="From" autofocus="">
+                </div>
+                <div class="col-md-2">
+                    <input ng-model="to" class="form-control" placeholder="To" autofocus="">
+                </div>
+            </div>
+            <br>
       	</form>
+        <button class="btn" ng-click="updatePrice()">Update Price</button>
     </div> 
-</div>
-    <div class="col-md-3"></div>
 	<div class="col-md-6">
-    			<h4 class="updatecaterer-heading">Moved Locations? Keep you account updated.</h4>
             <form> 
+                <label for="comment">Moved Locations? Update Address:</label>
     			<input ng-model="address" class="form-control" placeholder="Update Address" autofocus="">
     			<br>
-    			<button class="btn" ng-click="updateAddress()">Update Address</button><br>
-    			<h4 class="updatecaterer-cusinehead">Can cook a new type of Cuisine? Add it now!</h4>
-    			<input ng-model="cuisine" class="form-control" placeholder="Add Cuisine" autofocus=""><br>
+    			<button class="btn" ng-click="updateAddress()">Update Address</button><br><br>
+    			<label for="comment">Can cook a new type of Cuisine? Add it now!</label>
+    			<input ng-model="cuisines" class="form-control" placeholder="Add Cuisine" autofocus=""><br>
     			<button class="btn" ng-click="addCuisine()">Add Cuisine</button>
-    			<br>
-    			<h4 class="updatecaterer-changePass">Update password</h4><br>
+    			<br><br>
+    			<label for="comment">Update password</label><br>
     			<input type="password" ng-model="oldpassword" class="form-control" placeholder="Old Password">
     			<br>
     			<input type="password" ng-model="newpassword" class="form-control" placeholder="New Password">
     			<br>
     			<input type="password" ng-model="conpassword" class="form-control" placeholder="Confirm Password">
     			<br>
-			    <button class="btn" ng-click="updatePass()">Change Password</button>
-
-			  	</div>
-			  </form>
-			</div>
-
-		</div>
-
-
-            </form>
-
-            </form>
-
-	</div>
-
-
+                <button clas="btn btn-primary btn-sm" ng-click="updatePass()">Change Password</button>
+			 </form>
+	   </div>
+    </div>
