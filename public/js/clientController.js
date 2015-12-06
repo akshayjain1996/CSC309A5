@@ -62,6 +62,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 			controller: 'catererDisplay'
 		})
 
+		.when('/order', {
+			templateUrl: 'partials/order.html',
+			controller: 'orderController'
+		})
+
 	$locationProvider.html5Mode(true);
 
 }]);
@@ -484,7 +489,28 @@ app.controller('catererDisplay', function($scope, $http,  $location, $window, us
 	document.getElementById("spec").innerHTML = str; 
 	document.getElementById("desc").innerHTML = caterer.aboutMe; 
 
+	$scope.order = function(){
+		userFactory.setCaterer(caterer);
+		$location.path('/order');
+	}
 }); 
+
+
+app.controller('orderController', function($scope, $http,  $location, $window, userFactory){
+	$scope.submit = function(){
+		var cater = userFactory.getCaterer();
+		var usr = userFactory.getUser;
+
+		var order_details = $scope.details;
+		var delivery_details = $scope.delivery_details;
+
+		$http.post('/placeOrder', {user : usr._id, caterer : cater._id, order_det : order_details, delivery_det: delivery_details}).success(function(response){
+			$window.alert("Order Placed");
+			$location.path('/catererDisplay');
+		});
+
+	}
+});
 
 app.controller('catererDashboard', function($scope, $http,  $location, $window, userFactory){
 	var refresh = function(){
@@ -635,4 +661,3 @@ app.factory('userFactory', function(){
 
 	return userFactory;
 });
-

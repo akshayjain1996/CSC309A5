@@ -30,6 +30,8 @@ module.exports = function(app) {
 	app.post('/updateAddr', controller.editAddr); 
 
 	app.post('/editCus', controller.editCus); 
+
+	app.post('/placeOrder', controller.addOrder);
 /*
 	app.get('/userlist', controller.allUsers);
 

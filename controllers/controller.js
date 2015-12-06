@@ -1,6 +1,5 @@
 var Account = require('../models/Account');
 var Order = require('../models/Order');
-var UserProfile = require('../models/UserProfile');
 
 module.exports = {
 	
@@ -186,14 +185,17 @@ module.exports = {
 	addOrder : function(req, res){
 		var session;
 		session = req.session;
-		var order = new Order();				
-		order.details = req.body.details;
-		order.contact_info = req.body.contact_info;
-		//order.placed_time
-		order.fulfillment_time = req.body.fulfillment_time;
-		order.delivery_details = req.body.delivery_details;
-		order.catererid = req.body.catererid;// -1 = not assigned to specific caterer
-		order.status = 1;//0=not accepted yet, 1=acccepted, 2=done
+
+		var order = new Order();
+		var date = new Date();
+
+		order.details = req.body.order_det;
+		order.contact_info = req.body.user;
+		order.delivery_details = req.body.delivery_det;
+		order.catererid = req.body.caterer;
+		order.status = 1;
+		order.placed_time = date.getHours() + ":" + date.getMinutes();
+
 		order.save();
 		res.session = session;
 		res.send({sucess: 'true', user: JSON.stringify(order)});
@@ -214,9 +216,12 @@ module.exports = {
 	// filtered by req.body.catererid & req.body.status
 	// catererid -1 means not assigned to anyone
 	getOrders: function(req, res){
+		console.log(req.body.status);
+		console.log(req.body.catererid);
+		session = req.session;
 		Order.find({status: req.body.status, catererid: req.body.catererid}, function (err, docs) {
 			if(err){
-				console.log(error);
+				console.log(err);
 			} else{
 				console.log("Sending resp");
 				console.log(docs);

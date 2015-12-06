@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 
-
 /* 
 Status:
 	1 - Placed
@@ -18,8 +17,8 @@ var orderSchema = new mongoose.Schema({
 	placed_time: String,
 	fulfillment_time: String,
 	delivery_details: String,
-	caterer_id: Number,
-	client_id: Number,
+	catererid: String,
+	client_id: String,
 	status: Number
 });
 
