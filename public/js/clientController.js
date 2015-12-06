@@ -91,7 +91,7 @@ app.controller('LoginCtl', function($scope, $http, $location, $route, $window, u
 
 	$scope.login = function() {
 		console.log($scope.username);
-		$http.post('login', {username: $scope.username, password: $scope.password}).success(function (response){
+		$http.post('/login', {username: $scope.username, password: $scope.password}).success(function (response){
 			if(response.sucess == 'true'){
 				console.log(response.user);
 				userFactory.setUser(JSON.parse(response.user));
@@ -467,10 +467,22 @@ app.controller('userEdit', function($scope, $http,  $location, $window, userFact
 
 app.controller('catererDisplay', function($scope, $http,  $location, $window, userFactory){
 	var caterer = userFactory.getCaterer(); 
+	var i; 
+	var str = "";
+	var array_cus = caterer.catererProfile.speciality;
 
 	document.getElementById("display").innerHTML = caterer.displayname; 
-	document.getElementById("email").innerHTML = caterer.username; 
-	document.getElementById("type").innerHTML = caterer.type; 
+	document.getElementById("email").innerHTML = caterer.username;
+	for(i = 0; i < array_cus.length; i++){
+		if(i ==  array_cus.length - 1){
+			str += " " + array_cus[i];
+		}else{
+			str += " " + array_cus[i] + ",";
+		}
+	}  
+	document.getElementById("spec").innerHTML = str; 
+	document.getElementById("desc").innerHTML = caterer.aboutMe; 
+
 }); 
 
 app.controller('catererDashboard', function($scope, $http,  $location, $window, userFactory){
@@ -498,6 +510,7 @@ app.controller('catererEdit', function($scope, $http,  $location, $window, userF
 	
 	$scope.updateBasic = function(){
 		if($scope.userDesc!=""){
+			console.log($scope.userDesc); 
 			$http.post('/updateDesc', {userdesc: $scope.userDesc, userid: usr._id}).success(function (response){
 				if(response.sucess == "true"){
 					console.log(JSON.parse(response.user));

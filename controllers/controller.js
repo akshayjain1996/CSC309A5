@@ -327,9 +327,10 @@ module.exports = {
 			}else{
 				if(account.aboutMe == req.body.userdesc){
 					res.send({sucess: 'false', message: 'Please enter a new description.'});
-				}else{
+				}else{ 
 					account.aboutMe = req.body.userpass; 
 					account.save(); 
+					console.log(account.aboutMe); 
 					res.session = session; 
 					res.send({sucess: 'true', message: "Password changed.", user: JSON.stringify(account)}); 
 				}
