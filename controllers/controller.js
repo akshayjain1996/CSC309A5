@@ -430,6 +430,40 @@ module.exports = {
 			}
 		}); 
 	},
+
+	editRev: function(req, res){
+		var session; 
+		session = req.session; 
+		console.log(req.body.userRev); 
+		console.log(req.body.userR); 
+		console.log(req.body.catid); 
+		Account.findOne({_id: req.body.catid}, function(err, account){
+			if(err){
+				console.log(err);
+				res.send({sucess: 'false', message: 'No such user error'});
+			}
+			if(!account){
+				console.log('No user Exists');
+				res.send({sucess: 'false', message: 'No such user'});
+			}else{
+				account.catererProfile.reviews.push(req.body.userRev);
+				account.catererProfile.rating.push(req.body.userR); 
+				var rating_array = account.catererProfile.rating; 
+				var sum = 0; 
+				for(i = 0; i < rating_array.length; i++){
+					sum += rating_array[i]; 
+				}
+				var avg_rating = 0;  
+				if(rating_array.length != 0){
+					avg_rating = sum/rating_array.length; 
+				}
+				account.catererProfile.avgrating = avg_rating; 
+				account.save(); 
+				res.session = session; 
+				res.send({sucess: 'true', message: "Review submitted.", user: JSON.stringify(account)}); 
+			}
+		}); 
+	}, 
 	//when an order is rejected add it to the pool of orders that have not been picked up by anybody
 	rejectOrder: function(req, res){
 		req.body.orderstatus = 0;

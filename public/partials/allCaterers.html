@@ -17,8 +17,7 @@
 			<tr ng-repeat="cater in caterers | orderBy:'-rating' | limitTo:5">
 				<td>{{cater.displayname}}</td>
 				<td>{{cater.username}}</td>
-				<td>{{cater.speciality}}</td>
-				<td>{{cater.rating}}</td>
+				<td>{{cater.catererProfile.avgrating}}</td>
 				<td><button class="btn btn-primary btn-sm" ng-click="view(cater._id, cater)">View More</button></td>
 			</tr>
 		</tbody>
@@ -29,7 +28,7 @@
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search"></i></div>
 
-        <input type="text" class="form-control" placeholder="Search Caterers by Name, Address, Rating, & Specialties" ng-model="searchCaterers">
+        <input type="text" class="form-control" placeholder="Search Caterers by Name, Address, Rating, and Specialties" ng-model="searchCaterers">
 
       </div>      
     </div>
@@ -47,9 +46,9 @@
 			<tr ng-repeat="cater in caterers | filter:searchCaterers">
 				<td>{{cater.displayname}}</td>
 				<td>{{cater.username}}</td>
-				<td>{{cater.speciality}}</td>
-				<td>{{cater.rating}}</td>
+				<td>{{cater.catererProfile.avgrating}}</td>
 				<td><button class="btn btn-primary btn-sm" ng-click="view(cater._id, cater)">View More</button></td>
+				<td>{{cater.speciality}}</td>
 			</tr>
 		</tbody>
 	</table>
