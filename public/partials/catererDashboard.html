@@ -1,24 +1,22 @@
 <div id="all_caters" class="container" ng-controller="catererDashboard"> 
 
-    <button class="btn btn-primary btn-sm" ng-click="profile()">Profile</button>
-    <button class="btn btn-primary btn-sm" ng-click="dashboard()">Caterer Dashboard</button>
 
     <p> New Orders</p>
     <table class="table">
         <thead>
             <tr>
-                <th>Caterer Name</th>
-                <th>Address</th>
-                <th>Rating</th> 
+                <th>Client name</th>
+                <th>placed_time</th>
+                <th>details</th> 
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="order in newOrder">
-                <td>{{cater.displayname}}</td>
-                <td>{{cater.username}}</td>
-                <td>{{cater.rating}}</td>
-                <td><button class="btn btn-primary btn-sm" ng-click="view(cater._id)">View More</button></td>
+                <td>{{order.client_id}}</td>
+                <td>{{order.placed_time}}</td>
+                <td>{{order.details}}</td>
+                <td><button class="btn btn-primary btn-sm" ng-click="view(order._id)">Accept</button></td>
             </tr>
         </tbody>
     </table>
@@ -29,18 +27,18 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Caterer Name</th>
-                <th>Address</th>
-                <th>Rating</th> 
+                <th>Client name</th>
+                <th>placed_time</th>
+                <th>details</th> 
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="order in pending">
-                <td>{{cater.displayname}}</td>
-                <td>{{cater.username}}</td>
-                <td>{{cater.rating}}</td>
-                <td><button class="btn btn-primary btn-sm" ng-click="view(cater._id)">View More</button></td>
+                <td>{{order.client_id}}</td>
+                <td>{{order.placed_time}}</td>
+                <td>{{order.details}}</td>
+                <td><button class="btn btn-primary btn-sm" ng-click="view(order._id)">Completed</button></td>
             </tr>
         </tbody>
     </table>
@@ -51,20 +49,19 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Caterer Name</th>
-                <th>Address</th>
-                <th>Rating</th> 
-                <th>Action</th>
+                <th>Client name</th>
+                <th>placed_time</th>
+                <th>details</th> 
+                <th>Completed Time</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="order in completed">
-                <td>{{cater.displayname}}</td>
-                <td>{{cater.username}}</td>
-                <td>{{cater.rating}}</td>
-                <td><button class="btn btn-primary btn-sm" ng-click="view(cater._id)">View More</button></td>
+                <td>{{order.client_id}}</td>
+                <td>{{order.placed_time}}</td>
+                <td>{{order.details}}</td>
+                <td>{{order.fulfillment_time}}</td>
             </tr>
         </tbody>
     </table>
 </div> 
-

@@ -377,13 +377,14 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 					$window.alert("you are now registered as a caterer");
 					userFactory.setUser(JSON.parse(response.user));
 					console.log(JSON.parse(response.user));
+					$location.path('/catererDash');
 
 				}else {
 					$window.alert("somethings not right");
 				}
 			});
 		} else {
-
+			$location.path('/catererDash');
 		}
 
 	}
@@ -396,11 +397,14 @@ app.controller('user-dash', function($scope, $http,  $location, $window, userFac
 });
 
 app.controller('catererDashboard', function($scope, $http,  $location, $window, userFactory){
+	var refresh = function(){
+		$http.post('/getOrders', {status: 1, catererid: userFactory.getUser()._id}).success(function(response){
+			console.log(response.orderList);
+			$scope.newOrder = JSON.parse(response.orderList); 
+		}); 
+	}
 
-	
-
-	refresh(); 
-
+	refresh();
 });
 
 //Factory : stores the user currently logged in

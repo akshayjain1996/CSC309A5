@@ -19,6 +19,7 @@ var orderSchema = new mongoose.Schema({
 	fulfillment_time: String,
 	delivery_details: String,
 	caterer_id: Number,
+	client_id: Number,
 	status: Number
 });
 
