@@ -3,15 +3,24 @@ var controller = require('../controllers/controller');
 module.exports = function(app) {
 
 	app.get('/', function (req, res) {
-		console.log("index")
+		console.log("index");
 		res.sendfile("./views/index.html");
 	});
 
-
 	app.post('/signup', controller.addUser);
+
+	app.get('/caterers', controller.allCaterers);
 
 	app.post('/login', controller.login);
 
+	app.post('/makeCaterer', controller.makeCaterer);
+
+	app.post('/editdisplay', controller.editDisplay); 
+
+	app.post('/editdishes', controller.editDishes); 
+
+	app.post('/editpassword', controller.editPass)
+/*
 	app.get('/userlist', controller.allUsers);
 
 	app.post('/editProfile', controller.editProfile);
@@ -29,4 +38,5 @@ module.exports = function(app) {
 	app.post('/logout', controller.logout);
 
 	app.post('/uploadPic', controller.uploadPic);
-}
+	*/
+};

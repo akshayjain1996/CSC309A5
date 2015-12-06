@@ -5,35 +5,46 @@
 
     <title> Login </title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+ 
 
 </head>
 
 <body ng-app="a4" ng-controller="MainCtl">
-    <div class="header">
-        <div class="row">
-            <div class="col-md-4">
-                <img class="logo-image" src="img/logo.png" ng-click="goHome()">
-            </div>
-            <div class="col-md-6">
-                
-            </div>
-            <div class="col-md-2">
-                <button class="btn" id="logoutButton" ng-click="logout()">Logout</button>
-            </div>
-        </div>
+    <div id="title-div" class="row">
+      <div class="col-md-8">
+        <img id="logo" src="images/Logo.png" class="img-responsive" alt="Oops!">
+      </div>
+      <div class="col-md-4">GUEST</div>
     </div>
 
-        <div class="clear">
-            
-        </div>
 
-	<div >
-		<div ng-view>
+    <nav id="nav" class="navbar navbar-inverse"> 
+      <div id="nav_bar" class="container-fluid">  
+        <div class="navbar-header"> 
+          <a class="navbar-brand" href="#">Home</a> 
+        </div>  
+        <div class="navbar-collapse collapse in" aria-expanded="true"> 
+         <ul class="nav navbar-nav"> 
+            <li><a href="#">Page 1</a></li> 
+            <li><a href="#">Page 2</a></li> 
+            <li><a href="#">Page 3</a></li> 
+          </ul> 
+        </div> 
+      </div> 
+    </nav>
 
-		</div>
-	</div>
+
+  <div >
+    <div ng-view>
+
+    </div>
+  </div>
 
 </body>
 

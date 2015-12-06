@@ -1,0 +1,24 @@
+<div id="all_caters" class="container" ng-controller="allCaters"> 
+
+	<button class="btn btn-primary btn-sm" ng-click="profile()">Profile</button>
+	<button class="btn btn-primary btn-sm" ng-click="dashboard()">Caterer Dashboard</button>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Caterer Name</th>
+				<th>Address</th>
+				<th>Rating</th> 
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="cater in caterers">
+				<td>{{cater.displayname}}</td>
+				<td>{{cater.username}}</td>
+				<td>{{cater.rating}}</td>
+				<td><button class="btn btn-primary btn-sm" ng-click="view(cater._id, cater)">View More</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div> 

@@ -1,0 +1,29 @@
+<div class="container" ng-controller="userEdit"> 
+
+ <div class="col-md-3">[Image update]</div>
+	<div class="col-md-6">
+            <form> 
+            	<h4> Update Display </h4>
+    			<input id="disp" ng-model="displayname" class="form-control" placeholder="Update Display Name" autofocus="">
+    			<br>
+    			<button class="btn" ng-click="update()">Update display</button><br>
+    			<h4 class="updatecaterer-cusinehead">Add your favourite dish</h4>
+    			<input ng-model="cuisine" class="form-control" placeholder="Insert a favourite dish" autofocus="">
+    			<br>
+    			<button class="btn" ng-click="insert()">Insert</button>
+    			<br>
+    			<br>
+
+    			<h4 class="updatecaterer-changePass">Change password</h4>
+    			<br>
+    			<input type="password" ng-model="oldpassword" class="form-control" placeholder="Current Password">
+    			<br>
+    			<input type="password" ng-model="newpassword" class="form-control" placeholder="New Password">
+    			<br>
+    			<input type="password" ng-model="conpassword" class="form-control" placeholder="Confirm Password">
+    			<br>
+			    <button class="btn" ng-click="changePassword()">Change Password</button>
+            </form>
+	</div>
+
+</div>
