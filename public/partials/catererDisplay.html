@@ -1,11 +1,11 @@
 <div class="container" ng-controller="catererDisplay"> 
-	<div class="col-md-4">
+	<div class="col-md-3">
 
 		Image
 
 	</div>
 	
-	<div class="col-md-4">
+	<div class="col-md-5">
 		<div class="container">
 			<dl class="dl-horizontal" >
  				 <dt>Name: </dt>
@@ -13,14 +13,37 @@
  				 <br>
  				 <dt> E-mail: </dt>
  				 <dd id="email"></dd>
+ 				 <br> 
+ 				 <dt> Address: </dt>
+ 				 <dd id="addr"></dd>
  				 <br>
  				 <dt> Specializes in: </dt>
  				 <dd id="spec"></dd>
  				 <br>
  				 <dt> Description: </dt>
  				 <dd id="desc">No Description</dd>
+ 				 <br>
+ 				 <dt> Price Range: </dt>
+ 				 <dd id="pc"></dt>
+ 				 <br>
+ 				 <dt> Average Rating: </dt> 
+ 				 <dd id="r"></dd> 
 			</dl>
-			<button class="btn btn-primary btn-sm" ng-click="order()">PlaceOrder</button>
+			<label for="comment"> Reviews </label>
+			<p id="reviews"></p>
 		</div>
+	</div>
+
+	<div id="revs" class="col-md-4">
+		<form>
+			<label for="comment">Leave a review: </label>
+       		<textarea ng-model="catReview" class="form-control" rows="5"maxlength="499"></textarea>
+            <br>
+            <label for="comment">Leave a rating: </label>
+            <input ng-model="rating" class="form-control" placeholder="Rating 1 to 5" autofocus="">
+            <br>
+            <button class="btn" ng-click="postReview()">Submit</button> 
+            <button class="btn btn-primary btn-sm" ng-click="order()">PlaceOrder</button>  
+		</form>
 	</div>
 </div>
