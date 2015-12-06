@@ -3,21 +3,21 @@ mongoose.connect('mongodb://localhost/db14');
 
 /*
 Type:
-	1 - User
-	2 - Caterer
-	3 - Admin
+  1 - User
+  2 - Caterer
+  3 - Admin
 
 */
 
 var accountSchema = new mongoose.Schema({
-  type: Number,	
+  type: Number, 
   username: String,
   password: String,
   aboutMe: String,
   displayname: String,
   image: String, 
   catererProfile: {
-  	priceRangeLower: Number,
+    priceRangeLower: Number,
     priceRangeUpper: Number, 
 	  tags: [String],
 	  orders: [Number],
@@ -28,8 +28,8 @@ var accountSchema = new mongoose.Schema({
     review_count: Number
   },
   userProfile: {
-  	follows: [String], 
- 	  favs: [String], 
+    follows: [String], 
+    favs: [String], 
   },
 
 });

@@ -473,12 +473,18 @@ app.controller('userEdit', function($scope, $http,  $location, $window, userFact
 
 app.controller('catererDisplay', function($scope, $http,  $location, $window, userFactory){
 	var caterer = userFactory.getCaterer(); 
+	var usr = userFactory.getUser(); 
 	var i; 
 	var str = "";
 	var array_cus = caterer.catererProfile.speciality;
+	var rev_array = caterer.catererProfile.reviews; 
+	if(usr.type == 2){
+		document.getElementById("revs").style.display = "none"; 
+	}
 
 	document.getElementById("display").innerHTML = caterer.displayname; 
 	document.getElementById("email").innerHTML = caterer.username;
+	document.getElementById("addr").innerHTML = caterer.catererProfile.address; 
 	for(i = 0; i < array_cus.length; i++){
 		if(i ==  array_cus.length - 1){
 			str += " " + array_cus[i];
@@ -487,11 +493,39 @@ app.controller('catererDisplay', function($scope, $http,  $location, $window, us
 		}
 	}  
 	document.getElementById("spec").innerHTML = str; 
-	document.getElementById("desc").innerHTML = caterer.aboutMe; 
+	document.getElementById("desc").innerHTML = caterer.aboutMe;
+	document.getElementById("pc").innerHTML = "$" + caterer.catererProfile.priceRangeLower + " to $" + caterer.catererProfile.priceRangeUpper; 
+	var rev_str = ""; 
+	for(i = 0; i < rev_array.length; i++){
+		if(i ==  rev_array.length - 1){
+			rev_str += " " + rev_array[i];
+		}else{
+			rev_str += " " + rev_array[i] + "<br>" + "<br>";
+		}
+	}  
+	document.getElementById("r").innerHTML = caterer.catererProfile.avgrating; 
+	document.getElementById("reviews").innerHTML = rev_str; 
 
 	$scope.order = function(){
 		userFactory.setCaterer(caterer);
 		$location.path('/order');
+	}
+
+	$scope.postReview = function(){
+		if($scope.catReview == undefined || $scope.rating == undefined){
+			$window.alert("Missing field(s)."); 
+		}else if($scope.rating > 5 || $scope.rating < 0 ){
+			$window.alert("Invalid rating."); 
+		}else{
+			$http.post('/editReviews', {userRev: $scope.catReview + "<br>     " + "[by: " + usr.displayname + "]", userR: $scope.rating, catid: caterer._id}).success(function(response){
+				if(response.sucess == "true"){
+					console.log(JSON.parse(response.user)); 
+					$window.alert(response.message); 
+				}else{
+					$window.alert(response.message); 
+				}
+			});
+		}
 	}
 }); 
 
