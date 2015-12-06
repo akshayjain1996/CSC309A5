@@ -17,7 +17,8 @@ var accountSchema = new mongoose.Schema({
   displayname: String,
   image: String, 
   catererProfile: {
-  	priceRange: Number,
+  	priceRangeLower: Number,
+    priceRangeUpper: Number, 
 	  tags: [String],
 	  orders: [Number],
 	  rating: Number,
