@@ -3,6 +3,7 @@
 	<button class="btn btn-primary btn-sm" ng-click="profile()">Profile</button>
 	<button class="btn btn-primary btn-sm" ng-click="dashboard()">Caterer Dashboard</button>
 
+	Based on review recomendations by users, we recommend the following talented caterers:
 	<table class="table">
 		<thead>
 			<tr>
@@ -13,12 +14,44 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="cater in caterers">
+			<tr ng-repeat="cater in caterers | orderBy:'-rating' | limitTo:5">
 				<td>{{cater.displayname}}</td>
 				<td>{{cater.username}}</td>
+				<td>{{cater.speciality}}</td>
 				<td>{{cater.rating}}</td>
 				<td><button class="btn btn-primary btn-sm" ng-click="view(cater._id, cater)">View More</button></td>
 			</tr>
 		</tbody>
 	</table>
+	</br>
+	<form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+
+        <input type="text" class="form-control" placeholder="Search Caterers by Name, Address, Rating, & Specialties" ng-model="searchCaterers">
+
+      </div>      
+    </div>
+	</form>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Caterer Name</th>
+				<th>Address</th>
+				<th>Rating</th> 
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="cater in caterers | filter:searchCaterers">
+				<td>{{cater.displayname}}</td>
+				<td>{{cater.username}}</td>
+				<td>{{cater.speciality}}</td>
+				<td>{{cater.rating}}</td>
+				<td><button class="btn btn-primary btn-sm" ng-click="view(cater._id, cater)">View More</button></td>
+			</tr>
+		</tbody>
+	</table>
+	</br>
 </div> 
