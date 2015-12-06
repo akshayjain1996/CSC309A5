@@ -140,9 +140,10 @@ module.exports = {
 				console.log('No user Exists');
 				res.send({sucess: 'false', message: 'No such user'});
 			} else if (account.password == req.body.password){
-
+	
 				session.username = account.username;
 				res.session = session;
+				//res.session.authenticated = 1;
 				res.send({sucess: 'true', user: JSON.stringify(account)});
 
 			}
