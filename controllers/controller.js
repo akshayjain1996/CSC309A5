@@ -1,5 +1,6 @@
 var Account = require('../models/Account');
 var Order = require('../models/Order');
+var Review = require('../models/Review');
 
 module.exports = {
 	
@@ -46,7 +47,9 @@ module.exports = {
 				res.send({sucess: 'false', message: 'No such user exists'});
 			} else {
 				account.type = 2;
-				account.catererProfile.priceRange = 0;
+				account.catererProfile.avgrating = 0; 
+				account.catererProfile.priceRangeLower = 0;
+				account.catererProfile.priceRangeUpper = 0; 
 				account.save();
 				console.log("Sucessful	")
 				res.send({sucess: 'true', user: JSON.stringify(account)});
@@ -121,6 +124,7 @@ module.exports = {
 	logout : function(req, res){
 		var session;
 		session = req.session;
+		req.session.authenticated = 0;
 		res.session = null;
 		res.send({message: 'Logged out'});
 
@@ -139,14 +143,24 @@ module.exports = {
 				console.log('No user Exists');
 				res.send({sucess: 'false', message: 'No such user'});
 			} else if (account.password == req.body.password){
-
+	
 				session.username = account.username;
 				res.session = session;
+				res.session.authenticated = 1;
 				res.send({sucess: 'true', user: JSON.stringify(account)});
 
 			}
 		});
 
+	},
+	
+	loggedincheck: function(req, res){
+		if(req.session.authenticated == 1){
+			res.send({sucess: 'true'});
+		}
+		else{
+			res.send({sucess: 'false'});
+		}
 	},
 
 	allCaterers : function(req, res){
@@ -394,7 +408,7 @@ module.exports = {
 				}
 			}
 		}); 
-	}, 
+	}, 	
 
 	editCus: function(req, res){
 		var contains = function(arr, obj) {
@@ -429,6 +443,40 @@ module.exports = {
 			}
 		}); 
 	},
+
+	editRev: function(req, res){
+		var session; 
+		session = req.session; 
+		console.log(req.body.userRev); 
+		console.log(req.body.userR); 
+		console.log(req.body.catid); 
+		Account.findOne({_id: req.body.catid}, function(err, account){
+			if(err){
+				console.log(err);
+				res.send({sucess: 'false', message: 'No such user error'});
+			}
+			if(!account){
+				console.log('No user Exists');
+				res.send({sucess: 'false', message: 'No such user'});
+			}else{
+				account.catererProfile.reviews.push(req.body.userRev);
+				account.catererProfile.rating.push(req.body.userR); 
+				var rating_array = account.catererProfile.rating; 
+				var sum = 0; 
+				for(i = 0; i < rating_array.length; i++){
+					sum += rating_array[i]; 
+				}
+				var avg_rating = 0;  
+				if(rating_array.length != 0){
+					avg_rating = sum/rating_array.length; 
+				}
+				account.catererProfile.avgrating = avg_rating; 
+				account.save(); 
+				res.session = session; 
+				res.send({sucess: 'true', message: "Review submitted.", user: JSON.stringify(account)}); 
+			}
+		}); 
+	}, 
 	//when an order is rejected add it to the pool of orders that have not been picked up by anybody
 	rejectOrder: function(req, res){
 		req.body.orderstatus = 0;

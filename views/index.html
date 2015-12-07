@@ -15,36 +15,25 @@
 
 </head>
 
-<body ng-app="a4" ng-controller="MainCtl">
+<body id="bdy" ng-app="a4" ng-controller="MainCtl">
     <div id="title-div" class="row">
-      <div class="col-md-8">
+      <div class="col-md-4">
         <img id="logo" src="images/Logo.png" class="img-responsive" alt="Oops!">
       </div>
-      <div class="col-md-4">GUEST</div>
+       <h2 id="caption" size="100"><strong>Taste the difference... We have it all!<strong></h2>
     </div>
 
-
-    <nav id="nav" class="navbar navbar-inverse"> 
-      <div id="nav_bar" class="container-fluid">  
-        <div class="navbar-header"> 
-          <a class="navbar-brand" href="#">Home</a> 
-        </div>  
-        <div class="navbar-collapse collapse in" aria-expanded="true"> 
-         <ul class="nav navbar-nav"> 
-            <li><a href="#">Page 1</a></li> 
-            <li><a href="#">Page 2</a></li> 
-            <li><a href="#">Page 3</a></li> 
-          </ul> 
-        </div> 
-      </div> 
-    </nav>
-
-
-  <div >
-    <div ng-view>
-
+    <div class="row">
+        <div class="col-md-11"></div>
+            <div id="logout" class="col-md-1">
+                <button class="btn btn-primary btn-sm" ng-click="logout()">Logout</button>
+            </div>
+         </div>
+    <div class="container">
+        <div id="partial">
+            <div ng-view></div>
+        </div>
     </div>
-  </div>
 
 </body>
 

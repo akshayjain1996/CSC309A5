@@ -1,16 +1,51 @@
 var controller = require('../controllers/controller');
 
-module.exports = function(app) {
+function auth(req, res) {
+  if(req.session.authenticated != 1){
+	res.statusCode = 403; 
+	res.writeHead(403);
+	res.end("Forbidden.");
+	return false;	
+  }
+  else{
+	  //console.log("Here");
+	  //res.sendfile("./views/index.html");
+	  return true;
+  }
+}
 
-	app.get('/', function (req, res) {
+module.exports = function(app) {
+	
+	app.get('/', function (req, res) { 
+
+		console.log("index");
+		res.sendfile("./views/index.html");
+	});
+	
+	app.get('/*', function (req, res, next) {
+		var cont = auth(req, res);
+		if(cont == true){
+			next();
+		}
+	});
+
+
+	app.post('/signup', controller.addUser);
+	
+	app.post('/loggedincheck', controller.loggedincheck);
+	
+	app.get('/signup', function (req, res) {
 		console.log("index");
 		res.sendfile("./views/index.html");
 	});
 
-	app.post('/signup', controller.addUser);
-
-	app.get('/caterers', controller.allCaterers);
-
+	app.get('/reqcaterers', controller.allCaterers);
+	
+	app.get('/caterers', function (req, res) {
+		console.log("index");
+		res.sendfile("./views/index.html");
+	});
+	
 	app.post('/login', controller.login);
 
 	app.post('/makeCaterer', controller.makeCaterer);
@@ -34,6 +69,14 @@ module.exports = function(app) {
 	app.post('/placeOrder', controller.addOrder);
 
 	app.post('/updateOrderStatus', controller.updateOrderStatus);
+	
+	app.post('/editReviews', controller.editRev); 
+
+	app.post('/logout', controller.logout);
+	
+	app.get('/*', function (req, res, next) {
+		res.sendfile("./views/index.html");
+	});
 /*
 	app.get('/userlist', controller.allUsers);
 
@@ -49,7 +92,7 @@ module.exports = function(app) {
 
 	app.post('/tracker', controller.pageCount);
 
-	app.post('/logout', controller.logout);
+	
 
 	app.post('/uploadPic', controller.uploadPic);
 	*/

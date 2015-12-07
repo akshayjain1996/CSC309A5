@@ -1,6 +1,6 @@
-body {
+#bdy {
   padding-bottom: 40px;
-  background-color: #eee;
+  background-color:   #505050;
 }
 
 table, td, th {
@@ -84,6 +84,9 @@ td {
   
 }
 
+#partial{
+
+}
 
 #logo{
   height: 100px;
@@ -91,6 +94,43 @@ td {
 
 #title-div{
   border: 5px solid #00688B;
+  background-color: white; 
+  font-family: Papyrus, fantasy;
+  color:  #330000;
+}
+
+#catDis{
+  color: white;
+  font-family: Papyrus, fantasy;
+}
+
+#edUser{
+  color: white;
+  font-family: Papyrus, fantasy;
+}
+
+#edCat{
+  color: white;
+  font-family: Papyrus, fantasy;
+}
+
+#all_caters{
+  color: white;
+  font-family: Papyrus, fantasy;
+}
+
+#caption{
+  padding: 20px;
+}
+
+#logindv{
+  font-family: Papyrus, fantasy;
+  color:  #330000;
+}
+
+#signupdv{
+  font-family: Papyrus, fantasy;
+  color:  #330000;
 }
 
 #nav_bar{
@@ -133,3 +173,5 @@ td {
   background-color: #FEFCE8;
   border: 2px solid #00688B;
 }
+
+
