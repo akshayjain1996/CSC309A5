@@ -147,6 +147,9 @@ module.exports = {
 				session.username = account.username;
 				res.session = session;
 				res.session.authenticated = 1;
+				res.session.myid = account._id;
+				req.session.authenticated = 1;
+				req.session.myid = account._id;
 				res.send({sucess: 'true', user: JSON.stringify(account)});
 
 			}
@@ -164,17 +167,29 @@ module.exports = {
 	},
 
 	allCaterers : function(req, res){
+		console.log("XXXXXXXXXXXXXXXXXXXXXXXXX");
+		var catererList = [];
+		var orderList = [];
 		Account.find({}, function(err, accounts){
 			console.log(accounts);
-			var catererList = [];
 			for(var i = 0; i < accounts.length; i++){
 				if(accounts[i].type == 2){
 					catererList.push(accounts[i]);
 				}
 			}
 
-			res.send({caterers : JSON.stringify(catererList)});
+			Order.find({client_id: req.session.myid}, function(err, orders){
+				console.log(orders);
+				for(var i = 0; i < orders.length; i++){
+					orderList.push(orders[i]);
+				}
+
+				res.send({caterers : JSON.stringify(catererList), orders: JSON.stringify(orderList)});
+			});
+		
 		});
+
+		
 	},
 	
 	uploadProfile: function  (req, res) {
@@ -210,7 +225,7 @@ module.exports = {
 		order.client_name = req.body.client_name;
 		order.status = 1;
 		order.placed_time = date.getHours() + ":" + date.getMinutes();
-
+		order.client_id = req.session.myid;
 		order.save();
 		res.session = session;
 		res.send({sucess: 'true', user: JSON.stringify(order)});

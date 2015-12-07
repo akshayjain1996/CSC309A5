@@ -393,6 +393,7 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 		$http.get('/reqcaterers').success(function(response){
 			console.log(response.caterers);
 			$scope.caterers = JSON.parse(response.caterers);
+			$scope.myorders = JSON.parse(response.orders);
 		}); 
 	}
 
