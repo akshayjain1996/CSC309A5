@@ -237,6 +237,11 @@ module.exports = {
 					console.log("No such order exists!");
 				}
 				order.status = req.body.status;
+				if(req.body.status == 3){
+					var date = new Date();
+				var current_hour = date.getHours();
+					order.fulfillment_time = date.getHours() + ":" + date.getMinutes();
+				}
 				order.save();
 				console.log("Update Sucessful");
 			} );
