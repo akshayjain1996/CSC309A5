@@ -140,6 +140,10 @@ app.controller('LoginCtl', function($scope, $http, $location, $route, $window, u
 //controller for Signup page
 app.controller('SignupCtl', function($scope, $http, $location, $window, userFactory) {
 
+	$scope.back = function(){
+		$location.path('/');
+	}
+
 	$scope.submit = function() {
 
 		if($scope.password != $scope.repassword){
@@ -431,6 +435,11 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 
 app.controller('userEdit', function($scope, $http,  $location, $window, userFactory){
 	var usr = userFactory.getUser(); 
+
+	$scope.back = function(){
+		$location.path('/allCaterers'); 
+	}
+
 	$scope.update = function(){
 		if($scope.displayname != ""){
 			$http.post('/editdisplay', {userupdate: $scope.displayname, userid: usr._id}).success(function (response){
@@ -534,6 +543,11 @@ app.controller('catererDisplay', function($scope, $http,  $location, $window, us
 		$location.path('/order');
 	}
 
+	$scope.back = function(){
+		userFactory.setCaterer(null); 
+		$location.path('/allCaterers'); 
+	}
+
 	$scope.postReview = function(){
 		if($scope.catReview == undefined || $scope.rating == undefined){
 			$window.alert("Missing field(s)."); 
@@ -554,6 +568,11 @@ app.controller('catererDisplay', function($scope, $http,  $location, $window, us
 
 
 app.controller('orderController', function($scope, $http,  $location, $window, userFactory){
+	
+	$scope.back = function(){
+		$location.path('/catererDisplay');
+	}
+
 	$scope.submit = function(){
 		var cater = userFactory.getCaterer();
 		var usr = userFactory.getUser();
@@ -566,7 +585,7 @@ app.controller('orderController', function($scope, $http,  $location, $window, u
 			$location.path('/catererDisplay');
 		});
 
-	}
+	};
 });
 
 app.controller('catererDashboard', function($scope, $http,  $location, $window, userFactory){
@@ -585,6 +604,10 @@ app.controller('catererDashboard', function($scope, $http,  $location, $window, 
 			console.log(response.orderList);
 			$scope.completed = JSON.parse(response.orderList); 
 		});
+	}
+
+	$scope.back = function(){
+		$location.path('/allCaterers'); 
 	}
 
 	$scope.declineOrder = function(oid){
@@ -610,6 +633,10 @@ app.controller('catererDashboard', function($scope, $http,  $location, $window, 
 
 app.controller('catererEdit', function($scope, $http,  $location, $window, userFactory){
 	var usr = userFactory.getUser(); 
+
+	$scope.back = function(){
+		$location.path('/allCaterers'); 
+	}
 
 	$scope.updateDisplay = function(){
 		console.log($scope.displayname);
