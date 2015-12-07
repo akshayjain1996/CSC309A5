@@ -393,6 +393,7 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 		$http.get('/reqcaterers').success(function(response){
 			console.log(response.caterers);
 			$scope.caterers = JSON.parse(response.caterers);
+			$scope.myorders = JSON.parse(response.orders);
 		}); 
 	}
 
@@ -615,18 +616,21 @@ app.controller('catererDashboard', function($scope, $http,  $location, $window, 
 		$http.post('/updateOrderStatus', {orderid: oid, status: 0}).success(function(response) {
 			refresh();
 		});
+		$location.path('/allCaterers');
 	}
 
 	$scope.acceptOrder = function(oid){
 		$http.post('/updateOrderStatus', {orderid: oid, status: 2}).success(function(response) {
 			refresh();
 		});
+		$location.path('/allCaterers');
 	}
 
 	$scope.completeOrder = function(oid){
 		$http.post('/updateOrderStatus', {orderid: oid, status: 3}).success(function(response) {
 			refresh();
 		});	
+		$location.path('/allCaterers');
 	}
 
 	refresh();

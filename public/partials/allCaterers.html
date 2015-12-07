@@ -3,7 +3,7 @@
 	<button class="btn btn-primary btn-sm" ng-click="profile()">Profile</button>
 	<button class="btn btn-primary btn-sm" ng-click="dashboard()">Caterer Dashboard</button>
 
-	Based on review recomendations by users, we recommend the following talented caterers:
+	Based on review recomendations by users, we recommend the following talented caterers (only the TOP 5):
 	<br>
 	<table class="table">
 		<thead>
@@ -57,4 +57,28 @@
 		</tbody>
 	</table>
 	</br>
+	Here you can view the status of your orders.
+	</br>
+	Order Status 1: Pending review by caterer
+	</br>
+	Order Status 2: Accepted by caterer and work in progress
+	</br>
+	Order Status 3: Completed, please contact caterer for more details.
+	</br>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Order ID</th>
+				<th>Details</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="order in myorders | orderBy:'status'">
+				<td>{{order._id}}</td>
+				<td>{{order.details}}</td>
+				<td>{{order.status}}</td>
+			</tr>
+		</tbody>
+	</table>
 </div> 
