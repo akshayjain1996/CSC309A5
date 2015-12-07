@@ -99,6 +99,25 @@ td {
   color:  #330000;
 }
 
+#or{
+  color:  #330000;
+  font-family: Papyrus, fantasy;
+}
+
+#revs{
+  color: white;
+  font-family: Papyrus, fantasy;
+}
+
+#ds{
+  color: white;
+  font-family: Papyrus, fantasy;
+}
+
+#revstr{
+  width: 300px;
+}
+
 #catDis{
   color: white;
   font-family: Papyrus, fantasy;
