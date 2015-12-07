@@ -3,19 +3,19 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 
-<div class="container" ng-controller="catererEdit">
+<div id="edCat" class="container" ng-controller="catererEdit">
 	<div class="col-md-6">
 	    <br>
 		<form>
     		<label for="comment">Display Name:</h4>
     		<input ng-model="displayname" class="form-control" placeholder="Display Name" autofocus=""><br>
-            <button class="btn" ng-click="updateDisplay()">Update Display Name</button>
+            <button class="btn btn-primary" ng-click="updateDisplay()">Update Display Name</button>
             <br>
             <br>
         	<label for="comment">Description:</label>
        		<textarea ng-model="userDesc" class="form-control" rows="5" id="commentAd" maxlength="499"></textarea>
             <br>
-            <button class="btn" ng-click="updateBasic()">Update Description</button>   
+            <button class="btn btn-primary" ng-click="updateBasic()">Update Description</button>   
             <br>
             <br>
       		<label for="comment">Price Range:</label>
@@ -23,23 +23,23 @@
                 <div class="col-md-3">
        		      <input ng-model="from" class="form-control" placeholder="From" autofocus="">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <input ng-model="to" class="form-control" placeholder="To" autofocus="">
                 </div>
             </div>
             <br>
       	</form>
-        <button class="btn" ng-click="updatePrice()">Update Price</button>
+        <button class="btn btn-primary" ng-click="updatePrice()">Update Price</button>
     </div> 
 	<div class="col-md-6">
             <form> 
                 <label for="comment">Moved Locations? Update Address:</label>
     			<input ng-model="address" class="form-control" placeholder="Update Address" autofocus="">
     			<br>
-    			<button class="btn" ng-click="updateAddress()">Update Address</button><br><br>
+    			<button class="btn btn-primary" ng-click="updateAddress()">Update Address</button><br><br>
     			<label for="comment">Can cook a new type of Cuisine? Add it now!</label>
     			<input ng-model="cuisines" class="form-control" placeholder="Add Cuisine" autofocus=""><br>
-    			<button class="btn" ng-click="addCuisine()">Add Cuisine</button>
+    			<button class="btn btn-primary" ng-click="addCuisine()">Add Cuisine</button>
     			<br><br>
     			<label for="comment">Update password</label><br>
     			<input type="password" ng-model="oldpassword" class="form-control" placeholder="Old Password">
@@ -48,7 +48,7 @@
     			<br>
     			<input type="password" ng-model="conpassword" class="form-control" placeholder="Confirm Password">
     			<br>
-                <button class="btn" ng-click="updatePass()">Change Password</button>
+                <button class="btn btn-primary" ng-click="updatePass()">Change Password</button>
 			 </form>
 	   </div>
     </div>
