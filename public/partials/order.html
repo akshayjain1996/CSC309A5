@@ -1,4 +1,4 @@
-<div class="row">
+<div id="or" class="row">
 	<div class="col-md-4">
 		
 	</div>
@@ -7,7 +7,7 @@
 		<div class='message' id='message'></div>
 		<div class="login-container">
 			<form ng-submit="submit()">
-    			<h2 class="signin-heading">Sign Up</h2>
+    			<h2 class="signin-heading">Order Now</h2>
 				<br>    
 		        <input ng-model="details" class="form-control" placeholder="Details" autofocus="">
 		        <br>
@@ -16,7 +16,8 @@
 
 		        <br>
     			<div class="signin-buttons">
-					<button type="submit" class="btn" >Sign up</button>
+					<button type="submit" class="btn btn-primary">Order</button>
+					<button class="btn btn-primary" ng-click="back()">Back</button>
 			  	</div>
 
 			  </form>
