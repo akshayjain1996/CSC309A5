@@ -6,7 +6,6 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodejs server.js"
   },
   "author": "Akshay Jain",
   "license": "BSD-2-Clause",
