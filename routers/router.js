@@ -36,6 +36,8 @@ module.exports = function(app) {
 	app.post('/updateOrderStatus', controller.updateOrderStatus);
 
 	app.post('/editReviews', controller.editRev); 
+
+	app.post('/logout', controller.logout);
 /*
 	app.get('/userlist', controller.allUsers);
 
@@ -51,7 +53,7 @@ module.exports = function(app) {
 
 	app.post('/tracker', controller.pageCount);
 
-	app.post('/logout', controller.logout);
+	
 
 	app.post('/uploadPic', controller.uploadPic);
 	*/
