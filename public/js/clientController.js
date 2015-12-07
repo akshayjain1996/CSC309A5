@@ -155,7 +155,8 @@ app.controller('SignupCtl', function($scope, $http, $location, $window, userFact
 			.success(function(response) {
 				if(response.sucess == 'true'){
 					userFactory.setUser(JSON.parse(response.user));
-					$location.path('/caterers');
+					$window.alert("Signup successful!"); 
+					$location.path('/');
 				} else {
 					document.getElementById("message").innerHTML = response.message;
 				}
