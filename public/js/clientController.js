@@ -11,7 +11,11 @@ app.config(['$locationProvider', function($locationProvider){
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
 	$routeProvider	
-
+		.when('/*', {
+			templateUrl: 'partials/forbidden.html',
+			controller: 'forbidden'
+		})
+		
 		.when('/', {
 			templateUrl: 'partials/login.html',
 			controller: 'LoginCtl'
@@ -91,6 +95,11 @@ app.controller('MainCtl', function($scope, $http, $location, $route, userFactory
 
 });
 
+//Controller for forbidden
+app.controller('forbidden', function($scope, $http, $location, $route, $window, userFactory) {
+	$location.path('/forbidden');
+});
+
 //Controller for login page
 app.controller('LoginCtl', function($scope, $http, $location, $route, $window, userFactory) {
 
@@ -111,6 +120,15 @@ app.controller('LoginCtl', function($scope, $http, $location, $route, $window, u
 	$scope.signup = function() {
 		$location.path('/signup');
 	}
+	
+	//if already logged in, go to main page
+	$http.post('/loggedincheck', {}).success(function (response){
+			if(response.sucess == 'true'){
+				$location.path('/caterers');
+
+			} else {
+			}
+		});
 
 });
 
@@ -362,7 +380,7 @@ app.controller('allCaters', function($scope, $http,  $location, $window, userFac
 	var usr = userFactory.getUser();
 
 	var refresh = function(){
-		$http.get('/caterers').success(function(response){
+		$http.get('/reqcaterers').success(function(response){
 			console.log(response.caterers);
 			$scope.caterers = JSON.parse(response.caterers);
 		}); 
