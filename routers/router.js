@@ -29,6 +29,7 @@ module.exports = function(app) {
 		}
 	});
 
+
 	app.post('/signup', controller.addUser);
 	
 	app.post('/loggedincheck', controller.loggedincheck);
