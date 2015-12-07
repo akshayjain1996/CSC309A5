@@ -15,26 +15,25 @@
 
 </head>
 
-<body ng-app="a4" ng-controller="MainCtl">
+<body id="bdy" ng-app="a4" ng-controller="MainCtl">
     <div id="title-div" class="row">
-      <div class="col-md-8">
+      <div class="col-md-4">
         <img id="logo" src="images/Logo.png" class="img-responsive" alt="Oops!">
       </div>
+       <h2 id="caption" size="100"><strong>Taste the difference... We have it all!<strong></h2>
     </div>
 
     <div class="row">
-    <div class="col-md-11"></div>
-    <div class="col-md-1">
-        <button class="btn btn-primary btn-sm" ng-click="logout()">Logout</button>
-
+        <div class="col-md-11"></div>
+            <div id="logout" class="col-md-1">
+                <button class="btn btn-primary btn-sm" ng-click="logout()">Logout</button>
+            </div>
+         </div>
+    <div class="container">
+        <div id="partial">
+            <div ng-view></div>
+        </div>
     </div>
-    
-    </div>
-  <div >
-    <div ng-view>
-
-    </div>
-  </div>
 
 </body>
 
