@@ -9,6 +9,9 @@
   },
   "author": "Akshay Jain",
   "license": "BSD-2-Clause",
+  "engines": {
+    "node": "0.10.25"
+  },
   "dependencies": {
     "express": "~4.13.3",
     "body-parser": "~1.14.1",
