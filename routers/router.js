@@ -68,12 +68,15 @@ module.exports = function(app) {
 	app.post('/placeOrder', controller.addOrder);
 
 	app.post('/updateOrderStatus', controller.updateOrderStatus);
-	
+
 	app.get('/*', function (req, res, next) {
 		res.sendfile("./views/index.html");
 	});
 	
-	
+
+	app.post('/editReviews', controller.editRev); 
+
+	app.post('/logout', controller.logout);
 /*
 	app.get('/userlist', controller.allUsers);
 
@@ -89,7 +92,7 @@ module.exports = function(app) {
 
 	app.post('/tracker', controller.pageCount);
 
-	app.post('/logout', controller.logout);
+	
 
 	app.post('/uploadPic', controller.uploadPic);
 	*/
