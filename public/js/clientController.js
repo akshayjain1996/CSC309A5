@@ -30,6 +30,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 			templateUrl: 'partials/allCaterers.html',
 			controller: 'allCaters'	
 		})
+		
+		.when('/reqcateres', {
+			templateUrl: 'partials/allCaterers.html',
+			controller: 'allCaters'	
+		})
 	
 		.when('/profile', {
 			templateUrl: 'partials/profile.html',

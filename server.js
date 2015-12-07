@@ -6,8 +6,7 @@ var session = require('express-session');
 
 app.use(express.static('public'));
 app.use(parser.json())
-app.use(session({secret: '#uk!t'}));
-//app.use(session({secret: '#uk!t', cookie: {httpOnly: true, secure: true}}));
+app.use(session({secret: '#uk!t', cookie: {httpOnly: true}}));
 
 require('./routers/router')(app);
 
