@@ -124,7 +124,8 @@ module.exports = {
 	logout : function(req, res){
 		var session;
 		session = req.session;
-		res.session = null;
+		session.authenticated = 0
+		res.session = session;
 		res.send({message: 'Logged out'});
 
 	},
