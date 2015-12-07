@@ -142,12 +142,21 @@ module.exports = {
 	
 				session.username = account.username;
 				res.session = session;
-				//res.session.authenticated = 1;
+				res.session.authenticated = 1;
 				res.send({sucess: 'true', user: JSON.stringify(account)});
 
 			}
 		});
 
+	},
+	
+	loggedincheck: function(req, res){
+		if(req.session.authenticated == 1){
+			res.send({sucess: 'true'});
+		}
+		else{
+			res.send({sucess: 'false'});
+		}
 	},
 
 	allCaterers : function(req, res){
