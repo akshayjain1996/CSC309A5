@@ -9,6 +9,7 @@
 			<tr>
 				<th>Caterer Name</th>
 				<th>Address</th>
+				<th>Specialties</th> 
 				<th>Rating</th> 
 				<th>Action</th>
 			</tr>
@@ -17,7 +18,7 @@
 			<tr ng-repeat="cater in caterers | orderBy:'-rating' | limitTo:5">
 				<td>{{cater.displayname}}</td>
 				<td>{{cater.username}}</td>
-				<td>{{cater.speciality}}</td>
+				<td>{{caterer.catererProfile.speciality}}</td>
 				<td>{{cater.catererProfile.avgrating}}</td>
 				<td><button class="btn btn-primary btn-sm" ng-click="view(cater._id, cater)">View More</button></td>
 			</tr>
@@ -39,6 +40,7 @@
 			<tr>
 				<th>Caterer Name</th>
 				<th>Address</th>
+				<th>Specialties</th> 
 				<th>Rating</th> 
 				<th>Action</th>
 			</tr>
@@ -47,7 +49,7 @@
 			<tr ng-repeat="cater in caterers | filter:searchCaterers">
 				<td>{{cater.displayname}}</td>
 				<td>{{cater.username}}</td>
-				<td>{{cater.speciality}}</td>
+				<td>{{caterer.catererProfile.speciality}}</td>
 				<td>{{cater.catererProfile.avgrating}}</td>
 				<td><button class="btn btn-primary btn-sm" ng-click="view(cater._id, cater)">View More</button></td>
 			</tr>
