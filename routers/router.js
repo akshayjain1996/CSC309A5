@@ -22,12 +22,12 @@ module.exports = function(app) {
 		res.sendfile("./views/index.html");
 	});
 	
-	app.get('/*', function (req, res, next) {
-		var cont = auth(req, res);
-		if(cont == true){
-			next();
-		}
-	});
+	// app.get('/*', function (req, res, next) {
+	// 	var cont = auth(req, res);
+	// 	if(cont == true){
+	// 		next();
+	// 	}
+	// });
 
 
 	app.post('/signup', controller.addUser);
