@@ -68,15 +68,14 @@ module.exports = function(app) {
 	app.post('/placeOrder', controller.addOrder);
 
 	app.post('/updateOrderStatus', controller.updateOrderStatus);
-
-	app.get('/*', function (req, res, next) {
-		res.sendfile("./views/index.html");
-	});
 	
-
 	app.post('/editReviews', controller.editRev); 
 
 	app.post('/logout', controller.logout);
+	
+	app.get('/*', function (req, res, next) {
+		res.sendfile("./views/index.html");
+	});
 /*
 	app.get('/userlist', controller.allUsers);
 
