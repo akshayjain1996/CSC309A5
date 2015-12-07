@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/db14');
+mongoose.connect('mongodb://localhost/db15');
 
 /*
 Type:
@@ -19,13 +19,13 @@ var accountSchema = new mongoose.Schema({
   catererProfile: {
     priceRangeLower: Number,
     priceRangeUpper: Number, 
-	  tags: [String],
-	  orders: [Number],
-	  rating: Number,
-	  speciality: [String],
-	  address: String,
-	  reviews: [Number],
-    review_count: Number
+    tags: [String],
+    orders: [Number],
+    rating: [Number],
+    avgrating: Number,
+    speciality: [String],
+    address: String,
+    reviews: [String]
   },
   userProfile: {
     follows: [String], 
